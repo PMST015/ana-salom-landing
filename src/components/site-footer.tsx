@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { InstagramIcon, LinkedinIcon, WhatsAppIcon } from "@/components/icons";
 import { brand, contact, whatsappHref } from "@/lib/site-content";
 
@@ -7,8 +8,14 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="font-heading text-lg font-medium text-foreground">{brand.name}</p>
-            <p className="mt-1 max-w-sm text-sm text-muted-foreground">{brand.descriptor}</p>
+            <Image
+              src="/images/logo-negro.png"
+              alt="Ana María Salom Reyes"
+              width={600}
+              height={263}
+              className="h-10 w-auto"
+            />
+            <p className="mt-3 max-w-sm text-sm text-muted-foreground">{brand.descriptor}</p>
             <p className="mt-3 text-sm text-muted-foreground">{contact.city}</p>
           </div>
 

@@ -105,6 +105,15 @@ export function Hero() {
               className="object-cover"
             />
           </div>
+          <div className="absolute -right-4 -top-4 flex size-16 items-center justify-center rounded-full border border-border bg-background shadow-lg">
+            <Image
+              src="/images/isotipo-naranja.png"
+              alt=""
+              width={128}
+              height={128}
+              className="size-10"
+            />
+          </div>
           <div className="absolute -bottom-5 left-1/2 w-[85%] -translate-x-1/2 rounded-2xl border border-border bg-background/95 px-5 py-3 text-center shadow-lg backdrop-blur">
             <p className="font-heading text-base text-foreground">{brand.name}</p>
             <p className="mt-0.5 text-xs text-muted-foreground">{brand.trustStat}</p>

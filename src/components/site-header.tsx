@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,11 +19,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="#top"
-          className="font-heading text-lg font-semibold tracking-tight text-foreground"
-        >
-          Ana María Salom Reyes
+        <Link href="#top" aria-label="Ana María Salom Reyes — inicio" className="shrink-0">
+          <Image
+            src="/images/logo-negro.png"
+            alt="Ana María Salom Reyes"
+            width={600}
+            height={263}
+            priority
+            className="h-11 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
