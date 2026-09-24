@@ -9,7 +9,7 @@ export const contact = {
   whatsappMessage: "Hola Ana, me gustaría agendar una primera conversación contigo.",
   instagramHandle: "anasalomreyes",
   instagramUrl: "https://www.instagram.com/anasalomreyes",
-  linkedinUrl: "https://www.linkedin.com/in/anamariasalomreyes", // TODO: confirmar URL exacta de LinkedIn
+  linkedinUrl: "https://www.linkedin.com/in/ana-mar%C3%ADa-salom-reyes/",
   city: "Bogotá, Colombia",
 };
 
@@ -25,7 +25,7 @@ export const brand = {
   heroSubtitle:
     "Sanar lo vivido. Cuidarnos para cuidar. Recordar nuestro propósito. Poner nuestros dones al servicio de la vida.",
   heroLead:
-    "Acompaño a personas, familias, líderes, organizaciones y comunidades en procesos de transformación profunda que integran psicología, cuerpo, biografía, vínculos, consciencia y propósito para convertir el aprendizaje en una nueva manera de ser, relacionarnos y actuar.",
+    "Acompaño a personas, familias y empresas familiares en procesos de transformación profunda — psicología, cuerpo, biografía y propósito, al servicio de una nueva manera de vivir y relacionarnos.",
   trustStat: "+30 años · +20.000 horas de acompañamiento",
   pillars: ["Sanación", "Cuidado", "Propósito", "Regeneración"],
   signature:
@@ -34,9 +34,8 @@ export const brand = {
 
 export const bio = {
   paragraphs: [
-    "Soy psicóloga, psicoterapeuta integral y coach de propósito, con más de 30 años de experiencia acompañando procesos de desarrollo humano, transformación y liderazgo en personas, familias, equipos, empresas y comunidades en momentos de transición, crisis, conflicto, búsqueda de sentido y ampliación de consciencia.",
-    "Mi trabajo integra la dimensión psicológica, biográfica, corporal, relacional, contemplativa y de propósito, comprendiendo a cada persona no solo desde aquello que necesita sanar, sino también desde aquello que está llamado a desplegar.",
-    "Soy una mujer colombo-libanesa, psicóloga y humanista. Mi propia historia me enseñó tempranamente el valor de las raíces, la familia, la diversidad, el encuentro entre culturas y el legado. Ese recorrido me ha llevado a una convicción: la transformación profunda ocurre cuando aquello que comprendemos puede encarnarse en la manera como vivimos, cuidamos, nos relacionamos y ponemos nuestros dones al servicio de algo mayor que nosotros mismos.",
+    "Más de 30 años acompañando procesos de desarrollo humano, transformación y liderazgo en personas, familias, empresas y comunidades — en momentos de transición, crisis, conflicto o búsqueda de sentido. Mi trabajo integra lo psicológico, lo biográfico, lo corporal y lo contemplativo: no solo lo que necesita sanar, sino también lo que está llamado a desplegarse.",
+    "Soy colombo-libanesa, psicóloga y humanista. Mi propia historia me enseñó el valor de las raíces, la familia y el encuentro entre culturas — y me llevó a una convicción: la transformación ocurre cuando lo que comprendemos se encarna en la forma en que vivimos, cuidamos y nos relacionamos.",
   ],
   credentials: [
     "Psicología, Universidad de los Andes (Bogotá, 1991)",
@@ -64,45 +63,45 @@ export const services: Service[] = [
     title: "Psicoterapia Integral",
     summary: "Sanación y transformación",
     description:
-      "Un espacio de acompañamiento profundo para reconocer, comprender e integrar aquello que la historia de vida ha dejado inscrito en el cuerpo, las emociones, los pensamientos, los vínculos y las maneras de estar en el mundo. El proceso no busca reducir a la persona a un síntoma, sino escuchar la historia vivida, reconocer recursos internos y abrir espacio a nuevas posibilidades de relación consigo misma, con los demás y con la vida.",
+      "Un espacio para reconocer e integrar lo que la historia de vida dejó inscrito en el cuerpo, las emociones y los vínculos. No busca reducir a la persona a un síntoma, sino abrir posibilidades nuevas de relación consigo misma y con la vida.",
     idealFor:
-      "Personas que atraviesan crisis vitales, pérdidas, duelos, heridas relacionales, ansiedad o sobrecarga emocional; que reconocen patrones que se repiten en sus relaciones o decisiones; o que sienten que una antigua manera de vivir ya no representa quienes son hoy.",
+      "Crisis vitales, pérdidas, duelos, ansiedad o patrones que se repiten en tus relaciones y decisiones.",
   },
   {
     slug: "acompanamiento-familiar",
     title: "Acompañamiento Familiar",
     summary: "El primer ecosistema de cuidado",
     description:
-      "La familia, como primer ecosistema de cuidado, pertenencia, identidad y propósito, contiene una semilla fundamental para la transformación. Acompaño a las familias a escuchar aquello que necesita ser reconocido, cuidado, reparado o transformado, para cultivar nuevas formas de relacionarse que generen más vida en cada integrante y en el sistema familiar.",
+      "La familia es el primer ecosistema de cuidado, pertenencia e identidad. Acompaño a escuchar lo que necesita ser reconocido o transformado, para cultivar formas de relacionarse que generen más vida en cada integrante y en el sistema familiar.",
     idealFor:
-      "Familias que atraviesan conflictos recurrentes, distanciamiento o rupturas en sus vínculos, tensiones intergeneracionales, sobrecarga de alguno de sus miembros o patrones que se repiten de generación en generación — también familias que, sin estar en crisis, desean fortalecer sus vínculos y aprender a cuidarse sin perder la individualidad.",
+      "Conflictos recurrentes, distanciamiento, tensiones intergeneracionales o patrones que se repiten de generación en generación.",
   },
   {
     slug: "cuidado-de-cuidadores",
     title: "Cuidado de Cuidadores",
     summary: "Cuidar sin desaparecer en el acto de cuidar",
     description:
-      "Un espacio dirigido a quienes dedican una parte significativa de su vida a sostener a otros: familiares, profesionales de la salud y la educación, terapeutas, líderes, equipos y personas al servicio de comunidades. El proceso invita a reconocer cómo estamos cuidando y cómo estamos siendo cuidados, recuperar recursos internos, reconocer límites y necesidades, y transformar el autocuidado en una práctica consciente que también incluya a quien cuida.",
+      "Para quienes dedican gran parte de su vida a sostener a otros: familiares, terapeutas, líderes y equipos. Recuperamos recursos internos, límites y una forma de cuidar que también incluye a quien cuida.",
     idealFor:
-      "Personas que se sienten agotadas de sostener a otros, viven sobrecarga o culpa al poner límites, han postergado sus propias necesidades, o sienten desgaste emocional en su rol de cuidado.",
+      "Agotamiento por sostener a otros, culpa al poner límites o desgaste emocional en tu rol de cuidado.",
   },
   {
     slug: "proposito-vivo",
     title: "Propósito Vivo",
     summary: "Coaching de propósito y transiciones",
     description:
-      "El propósito es una experiencia viva que puede revelarse cuando reconocemos quiénes somos, integramos nuestra historia, escuchamos aquello que nos mueve profundamente y ponemos nuestros dones al servicio de algo que trasciende el beneficio individual. Este acompañamiento integra autoconocimiento, trabajo biográfico, coaching y prácticas contemplativas para tender un puente entre el mundo interior y la vida cotidiana.",
+      "El propósito se revela cuando integramos nuestra historia y escuchamos lo que nos mueve. Este acompañamiento une autoconocimiento, trabajo biográfico y prácticas contemplativas para tender un puente entre el mundo interior y la vida cotidiana.",
     idealFor:
-      "Personas que se preguntan '¿y ahora qué?', atraviesan cambios de etapa, reinvenciones profesionales, jubilación, nido vacío o migraciones, o que necesitan tomar decisiones importantes desde mayor coherencia.",
+      "El '¿y ahora qué?': reinvenciones profesionales, jubilación, nido vacío, migraciones o decisiones importantes.",
   },
   {
     slug: "trabajo-biografico",
     title: "Trabajo Biográfico",
     summary: "Descubrir el hilo de tu vida",
     description:
-      "Desde una mirada de orientación antroposófica e integral, acompaño a recorrer la propia historia no para cambiar aquello que ocurrió, sino para descubrir el hilo que la atraviesa y el sentido que puede emerger al mirarla desde el presente. Aquello que alguna vez vivimos únicamente como ruptura o fracaso puede revelar también aprendizajes y recursos que hoy podemos integrar conscientemente.",
+      "Acompaño a recorrer la propia historia no para cambiar lo que ocurrió, sino para descubrir el hilo que la atraviesa. Lo que alguna vez vivimos como ruptura puede revelar también aprendizajes que hoy integramos conscientemente.",
     idealFor:
-      "Personas en un umbral vital que sienten necesidad de comprender su historia con mayor profundidad, atraviesan cambios de etapa, pérdidas o reinvenciones profesionales, o desean reconciliarse con decisiones y experiencias del pasado.",
+      "Umbrales vitales, cambios de etapa o el deseo de reconciliarte con decisiones del pasado.",
   },
 ];
 

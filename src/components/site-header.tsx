@@ -38,7 +38,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+          <Button
+            asChild
+            className="rounded-full bg-primary text-primary-foreground transition-transform duration-200 hover:scale-[1.03] hover:bg-primary/90 active:scale-[0.97]"
+          >
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="size-4" />
               Escríbeme por WhatsApp

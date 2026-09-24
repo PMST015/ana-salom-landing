@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "motion/react";
+import Image from "next/image";
+import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/icons";
 import { brand, whatsappHref } from "@/lib/site-content";
 
-const EASE_OUT: [number, number, number, number] = [0.23, 1, 0.32, 1];
-
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="top" className="relative overflow-hidden">
       <div
@@ -21,9 +22,9 @@ export function Hero() {
 
       <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 pt-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-8 lg:pb-28 lg:pt-20">
         <motion.div
-          initial={{ opacity: 0, transform: "translateY(20px)" }}
-          animate={{ opacity: 1, transform: "translateY(0px)" }}
-          transition={{ duration: 0.7, ease: EASE_OUT }}
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
+          transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
         >
           <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-primary">
             {brand.pillars.join(" · ")}
@@ -45,7 +46,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="rounded-full bg-primary px-7 text-base text-primary-foreground hover:bg-primary/90"
+              className="rounded-full bg-primary px-7 text-base text-primary-foreground transition-[transform,background-color] duration-200 hover:scale-[1.02] hover:bg-primary/90 active:scale-[0.97]"
             >
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon className="size-4" />
@@ -56,7 +57,7 @@ export function Hero() {
               asChild
               size="lg"
               variant="outline"
-              className="rounded-full border-border px-7 text-base"
+              className="rounded-full border-border px-7 text-base transition-transform duration-200 hover:scale-[1.02] active:scale-[0.97]"
             >
               <a href="#servicios">Conoce los servicios</a>
             </Button>
@@ -73,44 +74,43 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, transform: "translateY(24px) scale(0.97)" }}
-          animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
-          transition={{ duration: 0.8, delay: 0.15, ease: EASE_OUT }}
-          className="relative mx-auto aspect-[4/5] w-full max-w-sm"
+          initial={
+            reduceMotion
+              ? { opacity: 0 }
+              : { opacity: 0, transform: "translateY(26px) scale(0.97)" }
+          }
+          animate={
+            reduceMotion
+              ? { opacity: 1 }
+              : { opacity: 1, transform: "translateY(0px) scale(1)" }
+          }
+          transition={
+            reduceMotion
+              ? { duration: 0.3 }
+              : { type: "spring", bounce: 0, duration: 0.9, delay: 0.1 }
+          }
+          className="relative mx-auto w-full max-w-sm"
         >
-          <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/25 via-secondary to-background" />
-          <div className="absolute inset-6 rounded-[1.5rem] border border-primary/25" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
-            <CedarMark className="h-24 w-24 text-foreground" />
-            <p className="font-heading text-2xl italic text-foreground">
-              {brand.name}
-            </p>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {brand.descriptor}
-            </p>
+          <div
+            aria-hidden
+            className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-primary/30 via-secondary to-transparent blur-2xl"
+          />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-primary/20 bg-secondary shadow-xl shadow-primary/10">
+            <Image
+              src="/images/ana-maria-salom-reyes.webp"
+              alt={`${brand.name}, ${brand.descriptor}`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 90vw, 420px"
+              className="object-cover"
+            />
+          </div>
+          <div className="absolute -bottom-5 left-1/2 w-[85%] -translate-x-1/2 rounded-2xl border border-border bg-background/95 px-5 py-3 text-center shadow-lg backdrop-blur">
+            <p className="font-heading text-base text-foreground">{brand.name}</p>
+            <p className="mt-0.5 text-xs text-muted-foreground">{brand.trustStat}</p>
           </div>
         </motion.div>
       </div>
     </section>
-  );
-}
-
-function CedarMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 100" fill="none" className={className} aria-hidden="true">
-      <circle cx="50" cy="50" r="48" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
-      <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-        <path d="M50 30c-9 3-16 6-22 6M50 30c9 3 16 6 22 6" />
-        <path d="M50 40c-11 3-19 6-26 6M50 40c11 3 19 6 26 6" />
-        <path d="M50 50c-13 3-22 6-30 6M50 50c13 3 22 6 30 6" />
-      </g>
-      <path d="M50 30v28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-      <path
-        d="M50 58c0 6-6 8-6 14M50 58c0 6 6 8 6 14"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-    </svg>
   );
 }
