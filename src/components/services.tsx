@@ -7,12 +7,22 @@ import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
-const LAYOUT: { area: string; size: "small" | "large"; aspect: string }[] = [
-  { area: "d", size: "large", aspect: "aspect-[3/4]" }, // Psicoterapia Integral — big portrait, featured
-  { area: "b", size: "small", aspect: "aspect-[4/3]" }, // Acompañamiento Familiar — wide landscape
-  { area: "a", size: "small", aspect: "aspect-square" }, // Cuidado de Cuidadores — small square
-  { area: "c", size: "small", aspect: "aspect-square" }, // Propósito Vivo — small square
-  { area: "e", size: "small", aspect: "aspect-square" }, // Trabajo Biográfico — small square
+const LAYOUT: { area: string; size: "small" | "large"; aspect: string; extra: string }[] = [
+  { area: "d", size: "large", aspect: "aspect-[3/4]", extra: "" }, // Psicoterapia Integral — big portrait, featured
+  {
+    area: "b",
+    size: "small",
+    aspect: "aspect-[4/3]",
+    extra: "lg:w-4/5 lg:justify-self-center",
+  }, // Acompañamiento Familiar — wide landscape, 20% smaller
+  {
+    area: "a",
+    size: "small",
+    aspect: "aspect-square",
+    extra: "lg:w-[110%] lg:justify-self-end lg:self-end",
+  }, // Cuidado de Cuidadores — small square, 10% bigger, bottom-aligned with b
+  { area: "c", size: "small", aspect: "aspect-square", extra: "" }, // Propósito Vivo — small square
+  { area: "e", size: "small", aspect: "aspect-square", extra: "" }, // Trabajo Biográfico — small square
 ];
 
 function srcSetFor(slug: string) {
@@ -37,6 +47,7 @@ function ServiceCard({
   area,
   size,
   aspect,
+  extra,
   isDesktop,
 }: {
   service: (typeof services)[number];
@@ -44,6 +55,7 @@ function ServiceCard({
   area: string;
   size: "small" | "large";
   aspect: string;
+  extra: string;
   isDesktop: boolean;
 }) {
   const reduceMotion = useReducedMotion();
@@ -66,9 +78,10 @@ function ServiceCard({
           ? { opacity: 1 }
           : { opacity: 1, filter: "blur(0px)", transform: "scale(1)" }
       }
+      whileHover={reduceMotion ? undefined : { transform: "scale(1.02)" }}
       viewport={{ once: false, amount: 0.4 }}
       transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay: Math.min(index * 0.04, 0.12) }}
-      className={`group relative ${aspect} w-full overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-transform duration-300 hover:scale-[1.02]`}
+      className={`group relative ${aspect} w-full overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 ${extra}`}
     >
       <img
         src={`/images/services/${service.slug}-800.webp`}
@@ -105,11 +118,10 @@ function ServiceCard({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`mt-4 flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-4 py-3 text-sm sm:px-6 sm:py-3.5 sm:text-base" : "px-3 py-2.5 text-xs"} font-medium`}
+            className={`mt-4 flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-6 py-3.5 text-base" : "px-3 py-2.5 text-xs"} font-medium`}
           >
             <WhatsAppIcon className="size-4 shrink-0" />
-            <span className="sm:hidden">Escríbeme por WhatsApp</span>
-            <span className="hidden sm:inline">Escríbeme para hablar más de este proceso</span>
+            Escríbeme
           </a>
         </div>
       </div>
@@ -142,6 +154,7 @@ export function Services() {
               area={LAYOUT[index].area}
               size={LAYOUT[index].size}
               aspect={LAYOUT[index].aspect}
+              extra={LAYOUT[index].extra}
               isDesktop={isDesktop}
             />
           ))}
