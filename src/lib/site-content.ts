@@ -98,6 +98,7 @@ export const services: Service[] = [
 export const specialties = [
   {
     pillar: "Sanación",
+    slug: "sanacion",
     items: [
       "Trauma y regulación emocional",
       "Duelo y pérdidas",
@@ -107,6 +108,7 @@ export const specialties = [
   },
   {
     pillar: "Cuidado",
+    slug: "cuidado",
     items: [
       "Autocuidado y cuidado",
       "Cuidado de cuidadores",
@@ -118,6 +120,7 @@ export const specialties = [
   },
   {
     pillar: "Propósito",
+    slug: "proposito",
     items: [
       "Propósito y sentido de vida",
       "Desarrollo personal y de consciencia",
@@ -125,6 +128,7 @@ export const specialties = [
   },
   {
     pillar: "Regeneración",
+    slug: "regeneracion",
     items: ["Bienestar y regeneración organizacional y comunitaria"],
   },
 ];

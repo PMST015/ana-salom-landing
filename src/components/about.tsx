@@ -3,7 +3,7 @@ import { bio, brand } from "@/lib/site-content";
 
 export function About() {
   return (
-    <section id="sobre-ana" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="sobre-ana" className="mx-auto max-w-[1800px] px-6 py-20 sm:px-12 lg:px-[100px]">
       <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <Reveal>
           <div className="lg:sticky lg:top-28">

@@ -17,8 +17,8 @@ import { nav, whatsappHref } from "@/lib/site-content";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-50 w-full px-4 pt-4 sm:px-6 lg:px-[100px]">
+      <header className="mx-auto flex h-20 max-w-[1700px] items-center justify-between rounded-full border border-white/40 bg-background/75 px-4 shadow-lg shadow-black/5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 sm:px-6">
         <Link href="#top" aria-label="Ana María Salom Reyes — inicio" className="shrink-0">
           <Image
             src="/images/logo-negro.png"
@@ -26,7 +26,7 @@ export function SiteHeader() {
             width={600}
             height={263}
             priority
-            className="h-11 w-auto"
+            className="h-12 w-auto sm:h-14"
           />
         </Link>
 
@@ -35,7 +35,7 @@ export function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-base text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
             </a>
@@ -45,7 +45,7 @@ export function SiteHeader() {
         <div className="hidden md:block">
           <Button
             asChild
-            className="rounded-full bg-primary text-primary-foreground transition-transform duration-200 hover:scale-[1.03] hover:bg-primary/90 active:scale-[0.97]"
+            className="rounded-full bg-primary px-5 text-base text-primary-foreground transition-transform duration-200 hover:scale-[1.03] hover:bg-primary/90 active:scale-[0.97]"
           >
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
               <WhatsAppIcon className="size-4" />
@@ -59,7 +59,7 @@ export function SiteHeader() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="rounded-full md:hidden"
               aria-label="Abrir menú de navegación"
             >
               <Menu className="size-5" />
@@ -94,7 +94,7 @@ export function SiteHeader() {
             </div>
           </SheetContent>
         </Sheet>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }

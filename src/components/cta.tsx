@@ -5,7 +5,7 @@ import { whatsappHref } from "@/lib/site-content";
 
 export function Cta() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-[1800px] px-6 pb-20 sm:px-12 lg:px-[100px]">
       <Reveal>
         <div className="rounded-3xl bg-foreground px-8 py-14 text-center text-background sm:px-16">
           <h2 className="font-heading text-3xl font-medium tracking-tight sm:text-4xl">

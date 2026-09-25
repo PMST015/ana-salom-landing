@@ -5,18 +5,18 @@ import { brand, contact, whatsappHref } from "@/lib/site-content";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1800px] px-6 py-12 sm:px-12 lg:px-[100px]">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-          <div>
+          <div className="sm:w-[30%]">
             <Image
               src="/images/logo-negro.png"
               alt="Ana María Salom Reyes"
               width={600}
               height={263}
-              className="h-10 w-auto"
+              className="h-auto w-52 sm:w-full"
             />
-            <p className="mt-3 max-w-sm text-sm text-muted-foreground">{brand.descriptor}</p>
-            <p className="mt-3 text-sm text-muted-foreground">{contact.city}</p>
+            <p className="mt-4 max-w-sm text-base text-muted-foreground">{brand.descriptor}</p>
+            <p className="mt-3 text-base text-muted-foreground">{contact.city}</p>
           </div>
 
           <div className="flex gap-3">

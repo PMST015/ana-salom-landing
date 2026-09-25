@@ -117,6 +117,25 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -129,5 +148,9 @@
   }
   html {
     @apply font-sans;
+    font-size: 112.5%;
+  }
+  p {
+    @apply leading-relaxed;
   }
 }

@@ -4,7 +4,7 @@ import { allies } from "@/lib/site-content";
 export function Allies() {
   return (
     <section id="aliados" className="bg-secondary/40 py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1800px] px-6 sm:px-12 lg:px-[100px]">
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary">
