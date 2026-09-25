@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div className="sm:w-[30%]">
             <Image
-              src="/images/logo-negro.png"
+              src="/images/logo-negro.webp"
               alt="Ana María Salom Reyes"
               width={600}
               height={263}

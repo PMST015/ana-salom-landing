@@ -21,7 +21,7 @@ export function SiteHeader() {
       <header className="mx-auto flex h-20 max-w-[1700px] items-center justify-between rounded-full border border-white/40 bg-background/75 px-4 shadow-lg shadow-black/5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 sm:px-6">
         <Link href="#top" aria-label="Ana María Salom Reyes — inicio" className="shrink-0">
           <Image
-            src="/images/logo-negro.png"
+            src="/images/logo-negro.webp"
             alt="Ana María Salom Reyes"
             width={600}
             height={263}
