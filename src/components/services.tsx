@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { GradientBlobs } from "@/components/gradient-blobs";
 import { WhatsAppIcon } from "@/components/icons";
@@ -18,18 +19,32 @@ function srcSetFor(slug: string) {
   return WIDTHS.map((w) => `/images/services/${slug}-${w}.webp ${w}w`).join(", ");
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+}
+
 function ServiceCard({
   service,
   index,
   area,
   size,
   aspect,
+  isDesktop,
 }: {
   service: (typeof services)[number];
   index: number;
   area: string;
   size: "small" | "large";
   aspect: string;
+  isDesktop: boolean;
 }) {
   const reduceMotion = useReducedMotion();
   const large = size === "large";
@@ -40,7 +55,7 @@ function ServiceCard({
   return (
     <motion.div
       id={service.slug}
-      style={{ gridArea: area }}
+      style={{ gridArea: isDesktop ? area : undefined }}
       initial={
         reduceMotion
           ? { opacity: 0 }
@@ -68,9 +83,9 @@ function ServiceCard({
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-      <div className={`relative flex h-full flex-col justify-end ${large ? "p-7" : "p-4"}`}>
+      <div className={`relative flex h-full flex-col justify-end ${large ? "p-5 sm:p-7" : "p-4"}`}>
         <h3
-          className={`font-heading font-medium tracking-tight text-white ${large ? "text-3xl sm:text-4xl" : "text-lg"}`}
+          className={`font-heading font-medium tracking-tight text-white ${large ? "text-2xl sm:text-4xl" : "text-lg"}`}
         >
           {service.title}
         </h3>
@@ -82,7 +97,7 @@ function ServiceCard({
               : "max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 group-focus-within:max-h-40 group-focus-within:opacity-100"
           }
         >
-          <p className={`mt-2 leading-snug text-white/85 ${large ? "text-lg" : "text-sm"}`}>
+          <p className={`mt-2 leading-snug text-white/85 ${large ? "text-base sm:text-lg" : "text-sm"}`}>
             {service.blurb}
           </p>
 
@@ -90,10 +105,11 @@ function ServiceCard({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`mt-4 flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-6 py-3.5 text-base font-medium" : "px-3 py-2.5 text-xs font-medium"}`}
+            className={`mt-4 flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-4 py-3 text-sm sm:px-6 sm:py-3.5 sm:text-base" : "px-3 py-2.5 text-xs"} font-medium`}
           >
             <WhatsAppIcon className="size-4 shrink-0" />
-            Escríbeme para hablar más de este proceso
+            <span className="sm:hidden">Escríbeme por WhatsApp</span>
+            <span className="hidden sm:inline">Escríbeme para hablar más de este proceso</span>
           </a>
         </div>
       </div>
@@ -102,6 +118,8 @@ function ServiceCard({
 }
 
 export function Services() {
+  const isDesktop = useIsDesktop();
+
   return (
     <section id="servicios" className="relative overflow-hidden py-20">
       <GradientBlobs />
@@ -124,6 +142,7 @@ export function Services() {
               area={LAYOUT[index].area}
               size={LAYOUT[index].size}
               aspect={LAYOUT[index].aspect}
+              isDesktop={isDesktop}
             />
           ))}
         </div>

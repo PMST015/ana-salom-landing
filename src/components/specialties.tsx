@@ -22,7 +22,7 @@ function FlipCard({
 
   return (
     <div
-      className="h-80 w-full [perspective:1500px] sm:h-96"
+      className="h-[26rem] w-full [perspective:1500px] sm:h-[30rem]"
       onMouseEnter={() => canHover() && setFlipped(true)}
       onMouseLeave={() => canHover() && setFlipped(false)}
     >
@@ -58,14 +58,14 @@ function FlipCard({
 
         {/* Back */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-2xl bg-foreground p-6 [backface-visibility:hidden]"
+          className="absolute inset-0 overflow-hidden rounded-2xl bg-foreground p-5 [backface-visibility:hidden] sm:p-6"
           style={{ transform: "rotateY(180deg)" }}
         >
-          <h3 className="font-heading text-lg font-medium text-background/70">{pillar}</h3>
-          <ul className="mt-4 space-y-2.5">
+          <h3 className="font-heading text-base font-medium text-background/70">{pillar}</h3>
+          <ul className="mt-3 space-y-2">
             {items.map((item) => (
-              <li key={item} className="flex gap-2.5 text-base text-background">
-                <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+              <li key={item} className="flex gap-2 text-sm leading-snug text-background sm:text-base">
+                <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
                 {item}
               </li>
             ))}

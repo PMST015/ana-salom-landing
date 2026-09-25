@@ -67,7 +67,7 @@ export function Hero() {
           className="relative h-[52vh] w-full"
         >
           <Image
-            src="/images/ana-banner-mobile.webp"
+            src="/images/ana-banner-mobile-v2.webp"
             alt={`${brand.name}, ${brand.descriptor}`}
             fill
             priority
