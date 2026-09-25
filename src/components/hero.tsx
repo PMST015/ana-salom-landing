@@ -6,95 +6,108 @@ import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/icons";
 import { brand, whatsappHref } from "@/lib/site-content";
 
+function HeroCopy({ light = false }: { light?: boolean }) {
+  return (
+    <>
+      <p className="mb-5 text-base font-medium uppercase tracking-[0.18em] text-primary">
+        {brand.pillars.join(" · ")}
+      </p>
+
+      <h1 className="font-heading text-5xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+        {brand.heroTitle}
+      </h1>
+
+      <p
+        className={`mt-6 max-w-xl text-xl leading-relaxed sm:text-2xl ${light ? "text-foreground/80" : "text-muted-foreground"}`}
+      >
+        {brand.heroSubtitle}
+      </p>
+
+      <p
+        className={`mt-4 max-w-xl text-lg leading-relaxed ${light ? "text-foreground/70" : "text-muted-foreground"}`}
+      >
+        {brand.heroLead}
+      </p>
+
+      <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Button
+          asChild
+          size="lg"
+          className="rounded-full bg-primary px-7 py-6 text-lg text-primary-foreground transition-[transform,background-color] duration-200 hover:scale-[1.02] hover:bg-primary/90 active:scale-[0.97]"
+        >
+          <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
+            <WhatsAppIcon className="size-5" />
+            Agenda una primera conversación
+          </a>
+        </Button>
+        <Button
+          asChild
+          size="lg"
+          variant="outline"
+          className="rounded-full border-border bg-background/70 px-7 py-6 text-lg backdrop-blur-sm transition-transform duration-200 hover:scale-[1.02] active:scale-[0.97]"
+        >
+          <a href="#servicios">Conoce los servicios</a>
+        </Button>
+      </div>
+    </>
+  );
+}
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
     <section id="top" className="relative overflow-hidden bg-secondary/30">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(55% 45% at 88% 15%, color-mix(in oklab, var(--primary) 16%, transparent) 0%, transparent 70%)",
-        }}
-      />
+      {/* Mobile: photo band on top, text below in normal flow */}
+      <div className="lg:hidden">
+        <motion.div
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "scale(1.02)" }}
+          animate={{ opacity: 1, transform: "scale(1)" }}
+          transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.9 }}
+          className="relative h-[52vh] w-full"
+        >
+          <Image
+            src="/images/ana-banner-mobile.webp"
+            alt={`${brand.name}, ${brand.descriptor}`}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-top"
+          />
+        </motion.div>
 
-      {/* Photo — bleeds edge-to-edge, positioned relative to the full section width */}
-      <motion.div
-        initial={
-          reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(0px) scale(1.02)" }
-        }
-        animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
-        transition={
-          reduceMotion
-            ? { duration: 0.3 }
-            : { type: "spring", bounce: 0, duration: 0.9, delay: 0.1 }
-        }
-        className="relative h-[46vh] w-full sm:h-[54vh] lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-[54%]"
-      >
-        <Image
-          src="/images/ana-banner-mobile.webp"
-          alt={`${brand.name}, ${brand.descriptor}`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center lg:hidden"
-        />
-        <Image
-          src="/images/ana-banner-desktop.webp"
-          alt={`${brand.name}, ${brand.descriptor}`}
-          fill
-          priority
-          sizes="54vw"
-          className="hidden object-cover object-center lg:block"
-        />
-      </motion.div>
-
-      <div className="relative mx-auto min-h-[560px] max-w-[1800px] lg:min-h-[760px]">
         <motion.div
           initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
           animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
           transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
-          className="relative z-10 px-6 pb-16 pt-10 sm:px-12 lg:w-[52%] lg:px-[100px] lg:py-24"
+          className="px-6 pb-16 pt-10 sm:px-12"
         >
-          <p className="mb-5 text-base font-medium uppercase tracking-[0.18em] text-primary">
-            {brand.pillars.join(" · ")}
-          </p>
-
-          <h1 className="font-heading text-5xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            {brand.heroTitle}
-          </h1>
-
-          <p className="mt-6 max-w-xl text-xl leading-relaxed text-muted-foreground sm:text-2xl">
-            {brand.heroSubtitle}
-          </p>
-
-          <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            {brand.heroLead}
-          </p>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full bg-primary px-7 py-6 text-lg text-primary-foreground transition-[transform,background-color] duration-200 hover:scale-[1.02] hover:bg-primary/90 active:scale-[0.97]"
-            >
-              <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                <WhatsAppIcon className="size-5" />
-                Agenda una primera conversación
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="rounded-full border-border px-7 py-6 text-lg transition-transform duration-200 hover:scale-[1.02] active:scale-[0.97]"
-            >
-              <a href="#servicios">Conoce los servicios</a>
-            </Button>
-          </div>
+          <HeroCopy />
         </motion.div>
+      </div>
+
+      {/* Desktop: full-bleed photo, text overlaid on top */}
+      <div className="relative hidden min-h-[85vh] w-full lg:block">
+        <Image
+          src="/images/ana-banner-fullbleed.webp"
+          alt={`${brand.name}, ${brand.descriptor}`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-transparent" />
+
+        <div className="relative mx-auto flex h-full min-h-[85vh] max-w-[1800px] items-center">
+          <motion.div
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
+            transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
+            className="max-w-2xl px-6 py-24 lg:px-[100px]"
+          >
+            <HeroCopy light />
+          </motion.div>
+        </div>
       </div>
     </section>
   );
