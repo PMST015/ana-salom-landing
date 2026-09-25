@@ -17,7 +17,7 @@ import { nav, whatsappHref } from "@/lib/site-content";
 
 export function SiteHeader() {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 w-full bg-[#e1e0e4] px-4 pt-4 sm:px-6 lg:px-[100px]">
+    <div className="fixed inset-x-0 top-0 z-50 w-full px-4 pt-4 sm:px-6 lg:px-[100px]">
       <header className="mx-auto flex h-20 max-w-[1700px] items-center justify-between rounded-full border border-white/40 bg-background/75 px-4 shadow-lg shadow-black/5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 sm:px-6">
         <Link href="#top" aria-label="Ana María Salom Reyes — inicio" className="shrink-0">
           <Image
