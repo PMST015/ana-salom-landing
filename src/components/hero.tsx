@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { GradientBlobs } from "@/components/gradient-blobs";
 import { WhatsAppIcon } from "@/components/icons";
 import { brand, whatsappHref } from "@/lib/site-content";
 
@@ -88,22 +89,23 @@ export function Hero() {
 
       {/* Desktop: full-bleed photo, text overlaid on top */}
       <div className="relative hidden min-h-[85vh] w-full lg:block">
+        <GradientBlobs />
         <Image
           src="/images/ana-banner-fullbleed.webp"
           alt={`${brand.name}, ${brand.descriptor}`}
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top"
+          className="object-cover object-top [-webkit-mask-image:radial-gradient(ellipse_58%_82%_at_76%_44%,black_48%,transparent_88%)] [mask-image:radial-gradient(ellipse_58%_82%_at_76%_44%,black_48%,transparent_88%)]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
 
         <div className="relative mx-auto flex h-full min-h-[85vh] max-w-[1800px] items-center">
           <motion.div
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
             animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
             transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
-            className="max-w-2xl px-6 py-24 lg:px-[100px]"
+            className="max-w-2xl px-6 pb-16 pt-40 lg:px-[100px]"
           >
             <HeroCopy light />
           </motion.div>
