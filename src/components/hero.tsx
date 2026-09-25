@@ -61,10 +61,10 @@ export function Hero() {
       {/* Mobile: photo band on top, text below in normal flow */}
       <div className="lg:hidden">
         <motion.div
-          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "scale(1.02)" }}
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "scale(1.02)" }}
           animate={{ opacity: 1, transform: "scale(1)" }}
           transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.9 }}
-          className="relative h-[52vh] w-full"
+          className="relative h-[50vh] w-full"
         >
           <Image
             src="/images/ana-banner-mobile-v2.webp"
@@ -77,8 +77,8 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
-          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(22px)" }}
+          animate={{ opacity: 1, transform: "translateY(0px)" }}
           transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
           className="px-6 pb-16 pt-10 sm:px-12"
         >
@@ -100,8 +100,8 @@ export function Hero() {
 
         <div className="relative mx-auto flex h-full min-h-[85vh] max-w-[1800px] items-center">
           <motion.div
-            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
-            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
+            initial={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(22px)" }}
+            animate={{ opacity: 1, transform: "translateY(0px)" }}
             transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
             className="max-w-2xl px-6 pb-16 pt-40 lg:px-[100px]"
           >

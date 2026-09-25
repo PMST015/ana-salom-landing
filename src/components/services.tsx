@@ -65,67 +65,70 @@ function ServiceCard({
   )}`;
 
   return (
-    <motion.div
+    <div
       id={service.slug}
       style={{ gridArea: isDesktop ? area : undefined }}
-      initial={
-        reduceMotion
-          ? { opacity: 0 }
-          : { opacity: 0.35, filter: "blur(10px)", transform: "scale(0.9)" }
-      }
-      whileInView={
-        reduceMotion
-          ? { opacity: 1 }
-          : { opacity: 1, filter: "blur(0px)", transform: "scale(1)" }
-      }
-      whileHover={reduceMotion ? undefined : { transform: "scale(1.02)" }}
-      viewport={{ once: false, amount: 0.4 }}
-      transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay: Math.min(index * 0.04, 0.12) }}
-      className={`group relative ${aspect} w-full overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 ${extra}`}
+      className={`group relative ${aspect} w-full cursor-pointer overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-transform duration-300 ease-out hover:scale-[1.02] ${extra}`}
     >
-      <img
-        src={`/images/services/${service.slug}-800.webp`}
-        srcSet={srcSetFor(service.slug)}
-        sizes="(min-width: 1024px) 45vw, 90vw"
-        alt={service.alt}
-        loading="lazy"
-        decoding="async"
-        width={800}
-        height={800}
-        className="absolute inset-0 size-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+      <motion.div
+        initial={
+          reduceMotion
+            ? { opacity: 1 }
+            : { opacity: 0.35, filter: "blur(10px)", transform: "scale(0.9)" }
+        }
+        whileInView={
+          reduceMotion
+            ? { opacity: 1 }
+            : { opacity: 1, filter: "blur(0px)", transform: "scale(1)" }
+        }
+        viewport={{ once: false, amount: 0.4 }}
+        transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay: Math.min(index * 0.04, 0.12) }}
+        className="absolute inset-0"
+      >
+        <img
+          src={`/images/services/${service.slug}-800.webp`}
+          srcSet={srcSetFor(service.slug)}
+          sizes="(min-width: 1024px) 45vw, 90vw"
+          alt={service.alt}
+          loading="lazy"
+          decoding="async"
+          width={800}
+          height={800}
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
-      <div className={`relative flex h-full flex-col justify-end ${large ? "p-5 sm:p-7" : "p-4"}`}>
-        <h3
-          className={`font-heading font-medium tracking-tight text-white ${large ? "text-2xl sm:text-4xl" : "text-lg"}`}
-        >
-          {service.title}
-        </h3>
-
-        <div
-          className={
-            large
-              ? "block"
-              : "max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 group-focus-within:max-h-40 group-focus-within:opacity-100"
-          }
-        >
-          <p className={`mt-2 leading-snug text-white/85 ${large ? "text-base sm:text-lg" : "text-sm"}`}>
-            {service.blurb}
-          </p>
-
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-4 flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-6 py-3.5 text-base" : "px-3 py-2.5 text-xs"} font-medium`}
+        <div className={`relative flex h-full flex-col justify-end ${large ? "p-5 sm:p-7" : "p-4"}`}>
+          <h3
+            className={`font-heading font-medium tracking-tight text-white ${large ? "text-2xl sm:text-4xl" : "text-lg"}`}
           >
-            <WhatsAppIcon className="size-4 shrink-0" />
-            Escríbeme
-          </a>
+            {service.title}
+          </h3>
+
+          <div
+            className={
+              large
+                ? "block"
+                : "max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 group-focus-within:max-h-40 group-focus-within:opacity-100"
+            }
+          >
+            <p className={`mt-2 leading-snug text-white/85 ${large ? "text-base sm:text-lg" : "text-sm"}`}>
+              {service.blurb}
+            </p>
+
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-4 flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-primary text-primary-foreground transition-transform hover:scale-[1.02] ${large ? "px-6 py-3.5 text-base" : "px-3 py-2.5 text-xs"} font-medium`}
+            >
+              <WhatsAppIcon className="size-4 shrink-0" />
+              Escríbeme
+            </a>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 

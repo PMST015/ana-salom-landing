@@ -19,8 +19,8 @@ export function Reveal({
       className={className}
       initial={
         reduceMotion
-          ? { opacity: 0 }
-          : { opacity: 0, transform: "translateY(18px) scale(0.98)" }
+          ? { opacity: 1 }
+          : { opacity: 1, transform: "translateY(18px) scale(0.98)" }
       }
       whileInView={
         reduceMotion
