@@ -6,12 +6,12 @@ import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
-const LAYOUT: { area: string; size: "small" | "large" }[] = [
-  { area: "a", size: "small" },
-  { area: "b", size: "small" },
-  { area: "center", size: "large" },
-  { area: "d", size: "small" },
-  { area: "e", size: "small" },
+const LAYOUT: { area: string; size: "small" | "large"; aspect: string }[] = [
+  { area: "d", size: "large", aspect: "aspect-[3/4]" }, // Psicoterapia Integral — big portrait, featured
+  { area: "b", size: "small", aspect: "aspect-[4/3]" }, // Acompañamiento Familiar — wide landscape
+  { area: "a", size: "small", aspect: "aspect-square" }, // Cuidado de Cuidadores — small square
+  { area: "c", size: "small", aspect: "aspect-square" }, // Propósito Vivo — small square
+  { area: "e", size: "small", aspect: "aspect-square" }, // Trabajo Biográfico — small square
 ];
 
 function srcSetFor(slug: string) {
@@ -23,11 +23,13 @@ function ServiceCard({
   index,
   area,
   size,
+  aspect,
 }: {
   service: (typeof services)[number];
   index: number;
   area: string;
   size: "small" | "large";
+  aspect: string;
 }) {
   const reduceMotion = useReducedMotion();
   const large = size === "large";
@@ -51,7 +53,7 @@ function ServiceCard({
       }
       viewport={{ once: false, amount: 0.4 }}
       transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay: Math.min(index * 0.04, 0.12) }}
-      className="group relative aspect-square w-full overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-transform duration-300 hover:scale-[1.02]"
+      className={`group relative ${aspect} w-full overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-transform duration-300 hover:scale-[1.02]`}
     >
       <img
         src={`/images/services/${service.slug}-800.webp`}
@@ -121,6 +123,7 @@ export function Services() {
               index={index}
               area={LAYOUT[index].area}
               size={LAYOUT[index].size}
+              aspect={LAYOUT[index].aspect}
             />
           ))}
         </div>

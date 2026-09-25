@@ -119,10 +119,11 @@
 
 @media (min-width: 1024px) {
   .services-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: 0.85fr 1.3fr 0.85fr;
+    align-items: start;
     grid-template-areas:
-      "a center center d"
-      "b center center e";
+      "a b b"
+      "c d e";
   }
 }
 
