@@ -19,33 +19,33 @@ export function SiteFooter() {
             <p className="mt-3 text-base text-muted-foreground">{contact.city}</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-4">
             <a
               href={contact.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram de Ana María Salom Reyes"
-              className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="flex size-16 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
             >
-              <InstagramIcon className="size-4" />
+              <InstagramIcon className="size-7" />
             </a>
             <a
               href={contact.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn de Ana María Salom Reyes"
-              className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="flex size-16 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
             >
-              <LinkedinIcon className="size-4" />
+              <LinkedinIcon className="size-7" />
             </a>
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Escribir por WhatsApp"
-              className="flex size-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="flex size-16 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary hover:text-primary"
             >
-              <WhatsAppIcon className="size-4" />
+              <WhatsAppIcon className="size-7" />
             </a>
           </div>
         </div>

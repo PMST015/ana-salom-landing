@@ -64,14 +64,6 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-10 border-t border-border pt-6">
-            <p className="font-heading text-xl text-foreground sm:text-2xl">
-              {brand.trustStat}
-            </p>
-            <p className="mt-1 text-base text-muted-foreground">
-              Personas · Familias · Organizaciones · Comunidades — en contextos multiculturales
-            </p>
-          </div>
         </motion.div>
 
         <motion.div
@@ -89,12 +81,20 @@ export function Hero() {
           className="relative order-1 h-[46vh] w-full sm:h-[54vh] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:h-full lg:w-[54%]"
         >
           <Image
-            src="/images/ana-banner-1800.webp"
+            src="/images/ana-banner-mobile.webp"
             alt={`${brand.name}, ${brand.descriptor}`}
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 54vw"
-            className="object-cover object-[75%_20%] lg:object-[60%_center]"
+            sizes="100vw"
+            className="object-cover object-center lg:hidden"
+          />
+          <Image
+            src="/images/ana-banner-desktop.webp"
+            alt={`${brand.name}, ${brand.descriptor}`}
+            fill
+            priority
+            sizes="54vw"
+            className="hidden object-cover object-center lg:block"
           />
         </motion.div>
       </div>

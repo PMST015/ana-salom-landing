@@ -1,8 +1,11 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { GradientBlobs } from "@/components/gradient-blobs";
 import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
+
+const OFFSETS = ["lg:mt-0", "lg:mt-20", "lg:mt-8", "lg:-mt-4", "lg:mt-16"];
 
 const WIDTHS = [480, 800, 1200, 1600];
 
@@ -31,7 +34,7 @@ function ServiceCard({ service, index }: { service: (typeof services)[number]; i
       }
       viewport={{ once: false, amount: 0.4 }}
       transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay: Math.min(index * 0.04, 0.12) }}
-      className="group relative aspect-[3/4] overflow-hidden rounded-2xl bg-secondary shadow-md shadow-primary/10 transition-transform duration-300 hover:scale-[1.03]"
+      className={`group relative aspect-[3/4] overflow-hidden rounded-2xl bg-secondary shadow-md shadow-primary/10 transition-transform duration-300 hover:scale-[1.03] ${OFFSETS[index % OFFSETS.length]}`}
     >
       <img
         src={`/images/services/${service.slug}-800.webp`}
@@ -71,20 +74,23 @@ function ServiceCard({ service, index }: { service: (typeof services)[number]; i
 
 export function Services() {
   return (
-    <section id="servicios" className="mx-auto max-w-[1800px] px-6 py-20 sm:px-12 lg:px-[100px]">
-      <div className="max-w-2xl">
-        <p className="text-base font-medium uppercase tracking-[0.18em] text-primary">
-          Servicios
-        </p>
-        <h2 className="mt-3 font-heading text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-          Cinco formas de acompañar tu transformación
-        </h2>
-      </div>
+    <section id="servicios" className="relative overflow-hidden py-20">
+      <GradientBlobs />
+      <div className="mx-auto max-w-[1800px] px-6 sm:px-12 lg:px-[100px]">
+        <div className="max-w-2xl">
+          <p className="text-base font-medium uppercase tracking-[0.18em] text-primary">
+            Servicios
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
+            Cinco formas de acompañar tu transformación
+          </h2>
+        </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-        {services.map((service, index) => (
-          <ServiceCard key={service.slug} service={service} index={index} />
-        ))}
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {services.map((service, index) => (
+            <ServiceCard key={service.slug} service={service} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
