@@ -53,55 +53,45 @@ export type Service = {
   slug: string;
   title: string;
   summary: string;
-  description: string;
-  idealFor: string;
+  tags: string[];
+  alt: string;
 };
 
 export const services: Service[] = [
   {
     slug: "psicoterapia-integral",
     title: "Psicoterapia Integral",
-    summary: "Sanación y transformación",
-    description:
-      "Un espacio para reconocer e integrar lo que la historia de vida dejó inscrito en el cuerpo, las emociones y los vínculos. No busca reducir a la persona a un síntoma, sino abrir posibilidades nuevas de relación consigo misma y con la vida.",
-    idealFor:
-      "Crisis vitales, pérdidas, duelos, ansiedad o patrones que se repiten en tus relaciones y decisiones.",
+    summary: "Sanar e integrar tu historia.",
+    tags: ["Crisis vitales", "Duelos", "Ansiedad"],
+    alt: "Mujer en un momento de escucha profunda durante una sesión de psicoterapia, luz cálida",
   },
   {
     slug: "acompanamiento-familiar",
     title: "Acompañamiento Familiar",
-    summary: "El primer ecosistema de cuidado",
-    description:
-      "La familia es el primer ecosistema de cuidado, pertenencia e identidad. Acompaño a escuchar lo que necesita ser reconocido o transformado, para cultivar formas de relacionarse que generen más vida en cada integrante y en el sistema familiar.",
-    idealFor:
-      "Conflictos recurrentes, distanciamiento, tensiones intergeneracionales o patrones que se repiten de generación en generación.",
+    summary: "El primer ecosistema de cuidado.",
+    tags: ["Conflictos", "Distanciamiento", "Vínculos"],
+    alt: "Madre e hija compartiendo un momento cálido al aire libre al atardecer",
   },
   {
     slug: "cuidado-de-cuidadores",
     title: "Cuidado de Cuidadores",
-    summary: "Cuidar sin desaparecer en el acto de cuidar",
-    description:
-      "Para quienes dedican gran parte de su vida a sostener a otros: familiares, terapeutas, líderes y equipos. Recuperamos recursos internos, límites y una forma de cuidar que también incluye a quien cuida.",
-    idealFor:
-      "Agotamiento por sostener a otros, culpa al poner límites o desgaste emocional en tu rol de cuidado.",
+    summary: "Cuidar sin desaparecer.",
+    tags: ["Agotamiento", "Límites", "Autocuidado"],
+    alt: "Abrazo cálido entre madre e hija, expresión de cuidado y afecto",
   },
   {
     slug: "proposito-vivo",
     title: "Propósito Vivo",
-    summary: "Coaching de propósito y transiciones",
-    description:
-      "El propósito se revela cuando integramos nuestra historia y escuchamos lo que nos mueve. Este acompañamiento une autoconocimiento, trabajo biográfico y prácticas contemplativas para tender un puente entre el mundo interior y la vida cotidiana.",
-    idealFor:
-      "El '¿y ahora qué?': reinvenciones profesionales, jubilación, nido vacío, migraciones o decisiones importantes.",
+    summary: "Escuchar lo que quiere emerger.",
+    tags: ["Transiciones", "Reinvención", "Sentido"],
+    alt: "Mujer escribiendo en su diario junto a una ventana con luz natural",
   },
   {
     slug: "trabajo-biografico",
     title: "Trabajo Biográfico",
-    summary: "Descubrir el hilo de tu vida",
-    description:
-      "Acompaño a recorrer la propia historia no para cambiar lo que ocurrió, sino para descubrir el hilo que la atraviesa. Lo que alguna vez vivimos como ruptura puede revelar también aprendizajes que hoy integramos conscientemente.",
-    idealFor:
-      "Umbrales vitales, cambios de etapa o el deseo de reconciliarte con decisiones del pasado.",
+    summary: "Descubrir el hilo de tu vida.",
+    tags: ["Umbrales vitales", "Legado", "Reconciliación"],
+    alt: "Manos entrelazadas de una pareja mayor caminando por un campo dorado al atardecer",
   },
 ];
 
@@ -142,8 +132,7 @@ export const specialties = [
 export const audiences = {
   b2c: {
     title: "Personas",
-    description:
-      "Acompañamiento individual para quienes atraviesan crisis, transiciones, duelos o búsquedas de sentido — y también para quienes, sin estar en crisis, desean vivir con mayor consciencia y propósito.",
+    description: "Acompañamiento individual en crisis, transiciones o búsqueda de sentido.",
     segments: [
       "Personas en procesos de sanación, duelo o transición vital",
       "Buscadores de propósito y crecimiento personal",
@@ -154,8 +143,7 @@ export const audiences = {
   },
   b2b: {
     title: "Empresas familiares y organizaciones",
-    description:
-      "Consultoría y acompañamiento para empresas familiares, equipos directivos, colegios, universidades y cámaras de comercio — porque una organización también tiene cultura, vínculos, heridas, patrones y capacidad regenerativa.",
+    description: "Consultoría para empresas familiares, equipos y organizaciones.",
     segments: [
       "Empresas familiares en procesos de sucesión o conflicto intergeneracional",
       "Comités directivos y equipos de liderazgo",

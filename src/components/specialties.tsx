@@ -13,11 +13,6 @@ export function Specialties() {
             <h2 className="mt-3 font-heading text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
               Cuatro territorios, una misma transformación
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Sanar e integrar la historia, aprender a cuidar y cuidarnos, y vivir desde el
-              propósito — atravesados por una cuarta dimensión que expresa el resultado: la
-              regeneración.
-            </p>
           </div>
         </Reveal>
 
