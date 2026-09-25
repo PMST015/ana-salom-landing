@@ -68,7 +68,7 @@ function ServiceCard({
     <div
       id={service.slug}
       style={{ gridArea: isDesktop ? area : undefined }}
-      className={`group relative ${aspect} w-full cursor-pointer overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-transform duration-300 ease-out hover:scale-[1.02] ${extra}`}
+      className={`group relative ${aspect} w-full cursor-pointer overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-[transform,box-shadow] duration-300 ease-out hover:z-10 hover:scale-[1.04] hover:shadow-2xl hover:shadow-primary/30 ${extra}`}
     >
       <motion.div
         initial={
@@ -94,7 +94,7 @@ function ServiceCard({
           decoding="async"
           width={800}
           height={800}
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 size-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
