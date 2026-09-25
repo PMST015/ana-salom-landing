@@ -217,9 +217,9 @@ export const allies: LogoPlaceholder[] = [
 
 export const nav = [
   { href: "#sobre-ana", label: "Sobre mí" },
+  { href: "#empresas", label: "Empresas" },
   { href: "#especialidades", label: "Especialidades" },
   { href: "#servicios", label: "Servicios" },
-  { href: "#empresas", label: "Empresas" },
   { href: "#aliados", label: "Aliados" },
   { href: "#faq", label: "Preguntas frecuentes" },
 ];
