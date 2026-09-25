@@ -53,7 +53,7 @@ export type Service = {
   slug: string;
   title: string;
   summary: string;
-  tags: string[];
+  blurb: string;
   alt: string;
 };
 
@@ -62,35 +62,40 @@ export const services: Service[] = [
     slug: "psicoterapia-integral",
     title: "Psicoterapia Integral",
     summary: "Sanar e integrar tu historia.",
-    tags: ["Crisis vitales", "Duelos", "Ansiedad"],
+    blurb:
+      "Un espacio para reconocer e integrar lo que la historia de vida dejó inscrito en el cuerpo, las emociones y los vínculos. Ideal ante crisis vitales, duelos o ansiedad.",
     alt: "Mujer en un momento de escucha profunda durante una sesión de psicoterapia, luz cálida",
   },
   {
     slug: "acompanamiento-familiar",
     title: "Acompañamiento Familiar",
     summary: "El primer ecosistema de cuidado.",
-    tags: ["Conflictos", "Distanciamiento", "Vínculos"],
+    blurb:
+      "Acompaño a las familias a escuchar lo que necesita ser reconocido o transformado, para relacionarse desde más vida. Ideal ante conflictos, distanciamiento o tensiones intergeneracionales.",
     alt: "Madre e hija compartiendo un momento cálido al aire libre al atardecer",
   },
   {
     slug: "cuidado-de-cuidadores",
     title: "Cuidado de Cuidadores",
     summary: "Cuidar sin desaparecer.",
-    tags: ["Agotamiento", "Límites", "Autocuidado"],
-    alt: "Abrazo cálido entre madre e hija, expresión de cuidado y afecto",
+    blurb:
+      "Para quienes sostienen a otros: familiares, terapeutas, líderes y equipos. Recuperamos recursos internos, límites y una forma de cuidar que también te incluya a ti.",
+    alt: "Persona ayudando a un adulto mayor con su movilidad, momento cálido al aire libre",
   },
   {
     slug: "proposito-vivo",
     title: "Propósito Vivo",
     summary: "Escuchar lo que quiere emerger.",
-    tags: ["Transiciones", "Reinvención", "Sentido"],
+    blurb:
+      "El propósito se revela al integrar nuestra historia y escuchar lo que nos mueve. Ideal ante reinvenciones, jubilación, nido vacío o decisiones importantes.",
     alt: "Mujer escribiendo en su diario junto a una ventana con luz natural",
   },
   {
     slug: "trabajo-biografico",
     title: "Trabajo Biográfico",
     summary: "Descubrir el hilo de tu vida.",
-    tags: ["Umbrales vitales", "Legado", "Reconciliación"],
+    blurb:
+      "Recorremos tu historia no para cambiar lo vivido, sino para descubrir el hilo que la atraviesa. Ideal ante umbrales vitales o el deseo de reconciliarte con el pasado.",
     alt: "Manos entrelazadas de una pareja mayor caminando por un campo dorado al atardecer",
   },
 ];

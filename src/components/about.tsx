@@ -17,15 +17,15 @@ export function About() {
             </h2>
             <p className="mt-3 text-lg text-muted-foreground">{brand.descriptor}</p>
 
-            <div className="relative mt-8 overflow-hidden rounded-[1.75rem] bg-secondary">
+            <div className="relative mt-8 mx-auto w-full max-w-[300px] overflow-hidden rounded-[1.75rem] bg-secondary sm:max-w-[340px]">
               <img
                 src="/images/ana-about.webp"
                 alt={brand.name}
                 loading="lazy"
                 className="w-full object-contain"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-6 pb-6 pt-16">
-                <blockquote className="font-heading text-xl italic leading-snug text-white sm:text-2xl">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-5 pb-5 pt-14">
+                <blockquote className="font-heading text-lg italic leading-snug text-white">
                   &ldquo;{brand.signature}&rdquo;
                 </blockquote>
               </div>

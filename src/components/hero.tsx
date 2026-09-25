@@ -20,12 +20,43 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto flex min-h-[560px] max-w-[1800px] flex-col lg:min-h-[760px] lg:flex-row lg:items-center">
+      {/* Photo — bleeds edge-to-edge, positioned relative to the full section width */}
+      <motion.div
+        initial={
+          reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(0px) scale(1.02)" }
+        }
+        animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
+        transition={
+          reduceMotion
+            ? { duration: 0.3 }
+            : { type: "spring", bounce: 0, duration: 0.9, delay: 0.1 }
+        }
+        className="relative h-[46vh] w-full sm:h-[54vh] lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-[54%]"
+      >
+        <Image
+          src="/images/ana-banner-mobile.webp"
+          alt={`${brand.name}, ${brand.descriptor}`}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center lg:hidden"
+        />
+        <Image
+          src="/images/ana-banner-desktop.webp"
+          alt={`${brand.name}, ${brand.descriptor}`}
+          fill
+          priority
+          sizes="54vw"
+          className="hidden object-cover object-center lg:block"
+        />
+      </motion.div>
+
+      <div className="relative mx-auto min-h-[560px] max-w-[1800px] lg:min-h-[760px]">
         <motion.div
           initial={reduceMotion ? { opacity: 0 } : { opacity: 0, transform: "translateY(22px)" }}
           animate={reduceMotion ? { opacity: 1 } : { opacity: 1, transform: "translateY(0px)" }}
           transition={reduceMotion ? { duration: 0.3 } : { type: "spring", bounce: 0, duration: 0.8 }}
-          className="relative z-10 order-2 px-6 pb-16 pt-10 sm:px-12 lg:order-1 lg:w-[52%] lg:px-[100px] lg:py-24"
+          className="relative z-10 px-6 pb-16 pt-10 sm:px-12 lg:w-[52%] lg:px-[100px] lg:py-24"
         >
           <p className="mb-5 text-base font-medium uppercase tracking-[0.18em] text-primary">
             {brand.pillars.join(" · ")}
@@ -63,39 +94,6 @@ export function Hero() {
               <a href="#servicios">Conoce los servicios</a>
             </Button>
           </div>
-
-        </motion.div>
-
-        <motion.div
-          initial={
-            reduceMotion
-              ? { opacity: 0 }
-              : { opacity: 0, transform: "translateY(0px) scale(1.02)" }
-          }
-          animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
-          transition={
-            reduceMotion
-              ? { duration: 0.3 }
-              : { type: "spring", bounce: 0, duration: 0.9, delay: 0.1 }
-          }
-          className="relative order-1 h-[46vh] w-full sm:h-[54vh] lg:absolute lg:inset-y-0 lg:right-0 lg:order-2 lg:h-full lg:w-[54%]"
-        >
-          <Image
-            src="/images/ana-banner-mobile.webp"
-            alt={`${brand.name}, ${brand.descriptor}`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center lg:hidden"
-          />
-          <Image
-            src="/images/ana-banner-desktop.webp"
-            alt={`${brand.name}, ${brand.descriptor}`}
-            fill
-            priority
-            sizes="54vw"
-            className="hidden object-cover object-center lg:block"
-          />
         </motion.div>
       </div>
     </section>
