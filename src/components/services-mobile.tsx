@@ -5,9 +5,14 @@ import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
+const SNAP_DURATION = 220;
 
 function srcSetFor(slug: string) {
   return WIDTHS.map((w) => `/images/services/${slug}-${w}.webp ${w}w`).join(", ");
+}
+
+function easeOutQuad(t: number) {
+  return 1 - (1 - t) * (1 - t);
 }
 
 export function ServicesMobile() {
@@ -20,62 +25,97 @@ export function ServicesMobile() {
     if (!scroller) return;
 
     let raf = 0;
+    let snapRaf = 0;
 
-    function update() {
-      const maxScroll = scroller!.scrollWidth - scroller!.clientWidth;
-      const atStart = scroller!.scrollLeft <= 4;
-      const atEnd = scroller!.scrollLeft >= maxScroll - 4;
-
+    // Lightweight visual pass: only scale + a touch of opacity. No blur —
+    // filter animations are expensive to composite on mobile GPUs.
+    function updateVisuals() {
       const rect = scroller!.getBoundingClientRect();
       const center = rect.left + rect.width / 2;
-      const cards = cardRefs.current;
 
-      cards.forEach((card, i) => {
+      cardRefs.current.forEach((card, i) => {
         if (!card) return;
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.left + cardRect.width / 2;
-        let distance = Math.abs(cardCenter - center);
-
-        if ((i === 0 && atStart) || (i === cards.length - 1 && atEnd)) {
-          distance = 0;
-        }
-
+        const distance = Math.abs(cardCenter - center);
         const ratio = Math.min(distance / (rect.width / 2), 1);
-        card.style.filter = `blur(${ratio * 6}px)`;
-        card.style.transform = `scale(${1.06 - ratio * 0.22})`;
-        card.style.opacity = `${1 - ratio * 0.45}`;
+
+        card.style.transform = `scale(${1.05 - ratio * 0.08})`;
+        card.style.opacity = `${1 - ratio * 0.25}`;
 
         const cta = ctaRefs.current[i];
         if (cta) {
-          const focused = ratio < 0.15;
+          const focused = ratio < 0.2;
           cta.style.opacity = focused ? "1" : "0";
-          cta.style.transform = focused ? "translateY(0px) scale(1)" : "translateY(8px) scale(0.9)";
           cta.style.pointerEvents = focused ? "auto" : "none";
         }
       });
-
       raf = 0;
     }
 
     function onScroll() {
       if (raf) return;
-      raf = requestAnimationFrame(update);
+      raf = requestAnimationFrame(updateVisuals);
     }
 
-    for (const card of cardRefs.current) {
-      if (card) card.style.transition = "transform 60ms linear, filter 60ms linear, opacity 60ms linear";
+    function nearestIndex() {
+      const rect = scroller!.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
+      let best = 0;
+      let bestDistance = Infinity;
+      cardRefs.current.forEach((card, i) => {
+        if (!card) return;
+        const cardRect = card.getBoundingClientRect();
+        const cardCenter = cardRect.left + cardRect.width / 2;
+        const distance = Math.abs(cardCenter - center);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = i;
+        }
+      });
+      return best;
     }
 
-    update();
-    const settleTimer = window.setTimeout(update, 300);
+    // Fully custom snap animation — we control the exact duration/easing
+    // ourselves instead of relying on the browser's own scroll-snap engine,
+    // which was the source of the earlier lag.
+    function snapTo(index: number) {
+      const card = cardRefs.current[index];
+      const scrollerEl = scrollerRef.current;
+      if (!card || !scrollerEl) return;
+
+      const start = scrollerEl.scrollLeft;
+      const target = card.offsetLeft - (scrollerEl.clientWidth - card.clientWidth) / 2;
+      const delta = target - start;
+      if (Math.abs(delta) < 1) return;
+
+      const startTime = performance.now();
+      cancelAnimationFrame(snapRaf);
+
+      function step(now: number) {
+        const t = Math.min((now - startTime) / SNAP_DURATION, 1);
+        scrollerEl!.scrollLeft = start + delta * easeOutQuad(t);
+        updateVisuals();
+        if (t < 1) snapRaf = requestAnimationFrame(step);
+      }
+      snapRaf = requestAnimationFrame(step);
+    }
+
+    function onTouchEnd() {
+      snapTo(nearestIndex());
+    }
+
+    updateVisuals();
     scroller.addEventListener("scroll", onScroll, { passive: true });
+    scroller.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
       scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onScroll);
-      window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
+      cancelAnimationFrame(snapRaf);
     };
   }, []);
 
@@ -96,7 +136,7 @@ export function ServicesMobile() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="relative aspect-[4/5] w-[80%] shrink-0 overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 will-change-[transform,filter]"
+              className="relative aspect-[4/5] w-[80%] shrink-0 overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10"
             >
               <img
                 src={`/images/services/${service.slug}-800.webp`}
@@ -126,8 +166,8 @@ export function ServicesMobile() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ opacity: 0, transform: "translateY(8px) scale(0.9)", pointerEvents: "none" }}
-                  className="mt-3 flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-[opacity,transform] duration-300"
+                  style={{ opacity: 0, pointerEvents: "none" }}
+                  className="mt-3 flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity duration-200"
                 >
                   <WhatsAppIcon className="size-4 shrink-0" />
                   Escríbeme
@@ -137,9 +177,6 @@ export function ServicesMobile() {
           );
         })}
       </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        Desliza para ver los 5 servicios →
-      </p>
     </div>
   );
 }
