@@ -1,16 +1,38 @@
+"use client";
+
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ParticleField } from "@/components/particle-field";
 import { Reveal } from "@/components/reveal";
 import { WhatsAppIcon } from "@/components/icons";
 import { whatsappHref } from "@/lib/site-content";
 
 export function Cta() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    ref.current.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    ref.current.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  }
+
   return (
     <section className="mx-auto max-w-[1800px] px-6 pb-20 sm:px-12 lg:px-[100px]">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl bg-foreground px-8 py-14 text-center text-background sm:px-16">
-          <ParticleField />
-          <div className="relative">
+        <div
+          ref={ref}
+          onMouseMove={handleMouseMove}
+          className="group relative overflow-hidden rounded-3xl bg-foreground px-8 py-14 text-center text-background sm:px-16"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--primary) 55%, transparent), transparent 70%)",
+            }}
+          />
+          <div className="relative transition-transform duration-500 ease-out group-hover:scale-105">
             <h2 className="font-heading text-3xl font-medium tracking-tight sm:text-4xl">
               ¿Qué vida puedo contribuir a regenerar?
             </h2>

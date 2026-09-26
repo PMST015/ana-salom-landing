@@ -24,8 +24,12 @@ export function Faq() {
       <Reveal delay={0.08}>
         <Accordion type="single" collapsible className="mt-10 w-full">
           {faqs.map((faq, index) => (
-            <AccordionItem key={faq.question} value={`faq-${index}`}>
-              <AccordionTrigger className="text-left font-heading text-base font-medium text-foreground sm:text-lg">
+            <AccordionItem
+              key={faq.question}
+              value={`faq-${index}`}
+              className="rounded-xl px-4 transition-colors duration-500 data-[state=open]:bg-gradient-to-r data-[state=open]:from-primary/0 data-[state=open]:via-primary/15 data-[state=open]:to-primary/0"
+            >
+              <AccordionTrigger className="text-left font-heading text-base font-medium text-foreground transition-colors duration-500 sm:text-lg data-[state=open]:text-primary">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-base leading-relaxed text-muted-foreground">

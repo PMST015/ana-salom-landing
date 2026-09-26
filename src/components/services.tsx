@@ -105,13 +105,7 @@ function ServiceCard({
             {service.title}
           </h3>
 
-          <div
-            className={
-              large
-                ? "block"
-                : "max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 group-focus-within:max-h-40 group-focus-within:opacity-100"
-            }
-          >
+          <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 group-focus-within:max-h-40 group-focus-within:opacity-100">
             <p className={`mt-2 leading-snug text-white/85 ${large ? "text-base sm:text-lg" : "text-sm"}`}>
               {service.blurb}
             </p>
