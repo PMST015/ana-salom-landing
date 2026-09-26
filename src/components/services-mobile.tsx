@@ -5,8 +5,6 @@ import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
-const AUTOPLAY_MS = 3500;
-const RESUME_AFTER_MS = 4000;
 
 function srcSetFor(slug: string) {
   return WIDTHS.map((w) => `/images/services/${slug}-${w}.webp ${w}w`).join(", ");
@@ -22,9 +20,6 @@ export function ServicesMobile() {
     if (!scroller) return;
 
     let raf = 0;
-    let autoplayTimer = 0;
-    let resumeTimer = 0;
-    let activeIndex = 0;
 
     function update() {
       const maxScroll = scroller!.scrollWidth - scroller!.clientWidth;
@@ -34,8 +29,6 @@ export function ServicesMobile() {
       const rect = scroller!.getBoundingClientRect();
       const center = rect.left + rect.width / 2;
       const cards = cardRefs.current;
-      let closestIndex = 0;
-      let closestDistance = Infinity;
 
       cards.forEach((card, i) => {
         if (!card) return;
@@ -45,10 +38,6 @@ export function ServicesMobile() {
 
         if ((i === 0 && atStart) || (i === cards.length - 1 && atEnd)) {
           distance = 0;
-        }
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = i;
         }
 
         const ratio = Math.min(distance / (rect.width / 2), 1);
@@ -65,7 +54,6 @@ export function ServicesMobile() {
         }
       });
 
-      activeIndex = closestIndex;
       raf = 0;
     }
 
@@ -74,65 +62,15 @@ export function ServicesMobile() {
       raf = requestAnimationFrame(update);
     }
 
-    function scrollToIndex(index: number) {
-      const card = cardRefs.current[index];
-      const scrollerEl = scrollerRef.current;
-      if (!card || !scrollerEl) return;
-      const target =
-        card.offsetLeft - (scrollerEl.clientWidth - card.clientWidth) / 2;
-      scrollerEl.scrollTo({ left: target, behavior: "smooth" });
-    }
-
-    function stopAutoplay() {
-      window.clearInterval(autoplayTimer);
-      autoplayTimer = 0;
-    }
-
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayTimer = window.setInterval(() => {
-        const next = (activeIndex + 1) % services.length;
-        scrollToIndex(next);
-      }, AUTOPLAY_MS);
-    }
-
-    function onTouchStart() {
-      stopAutoplay();
-      window.clearTimeout(resumeTimer);
-    }
-
-    function onTouchEnd() {
-      window.clearTimeout(resumeTimer);
-      resumeTimer = window.setTimeout(startAutoplay, RESUME_AFTER_MS);
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          startAutoplay();
-        } else {
-          stopAutoplay();
-          window.clearTimeout(resumeTimer);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    observer.observe(scroller);
-
     update();
+    const settleTimer = window.setTimeout(update, 300);
     scroller.addEventListener("scroll", onScroll, { passive: true });
-    scroller.addEventListener("touchstart", onTouchStart, { passive: true });
-    scroller.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
-      observer.disconnect();
-      stopAutoplay();
-      window.clearTimeout(resumeTimer);
       scroller.removeEventListener("scroll", onScroll);
-      scroller.removeEventListener("touchstart", onTouchStart);
-      scroller.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onScroll);
+      window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -195,6 +133,9 @@ export function ServicesMobile() {
           );
         })}
       </div>
+      <p className="mt-3 text-center text-xs text-muted-foreground">
+        Desliza para ver los 5 servicios →
+      </p>
     </div>
   );
 }
