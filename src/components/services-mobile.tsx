@@ -5,6 +5,8 @@ import { WhatsAppIcon } from "@/components/icons";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
+const AUTOPLAY_MS = 3500;
+const RESUME_AFTER_MS = 4000;
 
 function srcSetFor(slug: string) {
   return WIDTHS.map((w) => `/images/services/${slug}-${w}.webp ${w}w`).join(", ");
@@ -13,20 +15,27 @@ function srcSetFor(slug: string) {
 export function ServicesMobile() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const ctaRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
     let raf = 0;
+    let autoplayTimer = 0;
+    let resumeTimer = 0;
+    let activeIndex = 0;
+
     function update() {
       const maxScroll = scroller!.scrollWidth - scroller!.clientWidth;
-      const atStart = scroller!.scrollLeft <= 2;
-      const atEnd = scroller!.scrollLeft >= maxScroll - 2;
+      const atStart = scroller!.scrollLeft <= 4;
+      const atEnd = scroller!.scrollLeft >= maxScroll - 4;
 
       const rect = scroller!.getBoundingClientRect();
       const center = rect.left + rect.width / 2;
       const cards = cardRefs.current;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
 
       cards.forEach((card, i) => {
         if (!card) return;
@@ -34,18 +43,29 @@ export function ServicesMobile() {
         const cardCenter = cardRect.left + cardRect.width / 2;
         let distance = Math.abs(cardCenter - center);
 
-        // Snap the edge cards to fully-focused whenever the scroller rests
-        // at either end, regardless of any sub-pixel/gap rounding.
         if ((i === 0 && atStart) || (i === cards.length - 1 && atEnd)) {
           distance = 0;
         }
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
+        }
 
         const ratio = Math.min(distance / (rect.width / 2), 1);
-
         card.style.filter = `blur(${ratio * 6}px)`;
         card.style.transform = `scale(${1.06 - ratio * 0.22})`;
         card.style.opacity = `${1 - ratio * 0.45}`;
+
+        const cta = ctaRefs.current[i];
+        if (cta) {
+          const focused = ratio < 0.15;
+          cta.style.opacity = focused ? "1" : "0";
+          cta.style.transform = focused ? "translateY(0px) scale(1)" : "translateY(8px) scale(0.9)";
+          cta.style.pointerEvents = focused ? "auto" : "none";
+        }
       });
+
+      activeIndex = closestIndex;
       raf = 0;
     }
 
@@ -54,14 +74,65 @@ export function ServicesMobile() {
       raf = requestAnimationFrame(update);
     }
 
+    function scrollToIndex(index: number) {
+      const card = cardRefs.current[index];
+      const scrollerEl = scrollerRef.current;
+      if (!card || !scrollerEl) return;
+      const target =
+        card.offsetLeft - (scrollerEl.clientWidth - card.clientWidth) / 2;
+      scrollerEl.scrollTo({ left: target, behavior: "smooth" });
+    }
+
+    function stopAutoplay() {
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = 0;
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = window.setInterval(() => {
+        const next = (activeIndex + 1) % services.length;
+        scrollToIndex(next);
+      }, AUTOPLAY_MS);
+    }
+
+    function onTouchStart() {
+      stopAutoplay();
+      window.clearTimeout(resumeTimer);
+    }
+
+    function onTouchEnd() {
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(startAutoplay, RESUME_AFTER_MS);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startAutoplay();
+        } else {
+          stopAutoplay();
+          window.clearTimeout(resumeTimer);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(scroller);
+
     update();
-    const settleTimer = window.setTimeout(update, 300);
     scroller.addEventListener("scroll", onScroll, { passive: true });
+    scroller.addEventListener("touchstart", onTouchStart, { passive: true });
+    scroller.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("resize", onScroll);
+
     return () => {
+      observer.disconnect();
+      stopAutoplay();
+      window.clearTimeout(resumeTimer);
       scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener("touchstart", onTouchStart);
+      scroller.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onScroll);
-      window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -83,7 +154,7 @@ export function ServicesMobile() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="relative aspect-[4/5] w-[80%] shrink-0 snap-center overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-[filter,transform,opacity] duration-100 ease-out"
+              className="relative aspect-[4/5] w-[80%] shrink-0 snap-center overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10"
             >
               <img
                 src={`/images/services/${service.slug}-800.webp`}
@@ -97,7 +168,7 @@ export function ServicesMobile() {
               <div className="absolute inset-0 bg-black/25" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/10" />
 
-              <div className="relative flex h-full flex-col justify-end p-5 pr-16">
+              <div className="relative flex h-full flex-col justify-end p-5">
                 <span className="font-heading text-sm text-primary">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -105,24 +176,25 @@ export function ServicesMobile() {
                   {service.title}
                 </h3>
                 <p className="mt-1.5 text-sm leading-snug text-white/90">{service.summary}</p>
-              </div>
 
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Escribir por WhatsApp sobre ${service.title}`}
-                className="absolute bottom-5 right-5 flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg"
-              >
-                <WhatsAppIcon className="size-5" />
-              </a>
+                <a
+                  ref={(el) => {
+                    ctaRefs.current[index] = el;
+                  }}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ opacity: 0, transform: "translateY(8px) scale(0.9)", pointerEvents: "none" }}
+                  className="mt-3 flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-[opacity,transform] duration-300"
+                >
+                  <WhatsAppIcon className="size-4 shrink-0" />
+                  Escríbeme
+                </a>
+              </div>
             </div>
           );
         })}
       </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        Desliza para ver los 5 servicios →
-      </p>
     </div>
   );
 }

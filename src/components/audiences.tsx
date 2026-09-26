@@ -85,7 +85,7 @@ function AudienceCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-primary-foreground transition-all duration-300 lg:left-auto lg:right-6 lg:max-h-0 lg:translate-x-0 lg:overflow-hidden lg:px-0 lg:py-0 lg:opacity-0 lg:group-hover:max-h-14 lg:group-hover:px-6 lg:group-hover:py-3.5 lg:group-hover:opacity-100 lg:group-focus-within:max-h-14 lg:group-focus-within:px-6 lg:group-focus-within:py-3.5 lg:group-focus-within:opacity-100"
+          className="relative mt-6 flex w-fit items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-primary-foreground transition-all duration-300 lg:absolute lg:bottom-6 lg:right-6 lg:mt-0 lg:max-h-0 lg:overflow-hidden lg:px-0 lg:py-0 lg:opacity-0 lg:group-hover:max-h-14 lg:group-hover:px-6 lg:group-hover:py-3.5 lg:group-hover:opacity-100 lg:group-focus-within:max-h-14 lg:group-focus-within:px-6 lg:group-focus-within:py-3.5 lg:group-focus-within:opacity-100"
         >
           <WhatsAppIcon className="size-4 shrink-0" />
           <span className="whitespace-nowrap text-sm font-medium">Conversemos</span>
