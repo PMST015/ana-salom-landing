@@ -1,11 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { WhatsAppIcon } from "@/components/icons";
 import { audiences, contact } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
+
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+}
 
 function srcSetFor(slug: string) {
   return WIDTHS.map((w) => `/images/audiences/${slug}-${w}.webp ${w}w`).join(", ");
@@ -23,6 +36,7 @@ function AudienceCard({
   ctaMessage: string;
 }) {
   const reduceMotion = useReducedMotion();
+  const isDesktop = useIsDesktop();
   const offset = fromSide === "left" ? -90 : 90;
   const href = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(ctaMessage)}`;
 
@@ -31,7 +45,11 @@ function AudienceCard({
       initial={
         reduceMotion
           ? { opacity: 0 }
-          : { opacity: 0.3, filter: "blur(12px)", transform: `translateX(${offset}px)` }
+          : {
+              opacity: 0.3,
+              filter: "blur(12px)",
+              transform: `translateX(${isDesktop ? offset : 0}px)`,
+            }
       }
       whileInView={
         reduceMotion
@@ -71,7 +89,7 @@ function AudienceCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-6 right-6 flex max-h-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-primary text-primary-foreground opacity-0 transition-all duration-300 group-hover:max-h-14 group-hover:px-6 group-hover:py-3.5 group-hover:opacity-100 group-focus-within:max-h-14 group-focus-within:px-6 group-focus-within:py-3.5 group-focus-within:opacity-100"
+          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-primary-foreground transition-all duration-300 lg:left-auto lg:right-6 lg:max-h-0 lg:translate-x-0 lg:overflow-hidden lg:px-0 lg:py-0 lg:opacity-0 lg:group-hover:max-h-14 lg:group-hover:px-6 lg:group-hover:py-3.5 lg:group-hover:opacity-100 lg:group-focus-within:max-h-14 lg:group-focus-within:px-6 lg:group-focus-within:py-3.5 lg:group-focus-within:opacity-100"
         >
           <WhatsAppIcon className="size-4 shrink-0" />
           <span className="whitespace-nowrap text-sm font-medium">Conversemos</span>

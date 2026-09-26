@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { GradientBlobs } from "@/components/gradient-blobs";
 import { WhatsAppIcon } from "@/components/icons";
+import { ServicesMobile } from "@/components/services-mobile";
 import { contact, services } from "@/lib/site-content";
 
 const WIDTHS = [480, 800, 1200, 1600];
@@ -141,8 +142,14 @@ export function Services() {
             Cinco formas de acompañar tu transformación
           </h2>
         </div>
+      </div>
 
-        <div className="services-grid mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-7">
+      <div className="mt-10">
+        <ServicesMobile />
+      </div>
+
+      <div className="mx-auto hidden max-w-[1800px] px-6 sm:px-12 lg:block lg:px-[100px]">
+        <div className="services-grid mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 lg:gap-7">
           {services.map((service, index) => (
             <ServiceCard
               key={service.slug}

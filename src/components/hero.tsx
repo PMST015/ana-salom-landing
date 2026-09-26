@@ -37,7 +37,8 @@ function HeroCopy({ light = false }: { light?: boolean }) {
         >
           <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
             <WhatsAppIcon className="size-5" />
-            Agenda una primera conversación
+            <span className="lg:hidden">Hablar con Ana María</span>
+            <span className="hidden lg:inline">Agenda una primera conversación</span>
           </a>
         </Button>
         <Button

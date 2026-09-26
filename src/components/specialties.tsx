@@ -58,14 +58,19 @@ function FlipCard({
 
         {/* Back */}
         <div
-          className="absolute inset-0 overflow-hidden rounded-2xl bg-foreground p-5 [backface-visibility:hidden] sm:p-6"
+          className="absolute inset-0 flex flex-col justify-center overflow-hidden rounded-2xl bg-foreground p-5 text-center [backface-visibility:hidden] sm:p-6 lg:justify-start lg:text-left"
           style={{ transform: "rotateY(180deg)" }}
         >
-          <h3 className="font-heading text-base font-medium text-background/70">{pillar}</h3>
-          <ul className="mt-3 space-y-2">
+          <h3 className="font-heading text-xl font-medium text-background/70 lg:text-base">
+            {pillar}
+          </h3>
+          <ul className="mt-3 flex flex-col items-center gap-2 lg:items-stretch">
             {items.map((item) => (
-              <li key={item} className="flex gap-2 text-sm leading-snug text-background sm:text-base">
-                <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+              <li
+                key={item}
+                className="flex items-center justify-center gap-2 text-lg leading-snug text-background lg:justify-start lg:text-sm"
+              >
+                <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-primary" />
                 {item}
               </li>
             ))}
