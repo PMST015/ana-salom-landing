@@ -62,34 +62,17 @@ export function ServicesMobile() {
       raf = requestAnimationFrame(update);
     }
 
-    function setTransition(value: string) {
-      for (const card of cardRefs.current) {
-        if (card) card.style.transition = value;
-      }
-    }
-
-    // No transition while the finger is actually on the screen — the visual
-    // must track the touch 1:1. Only smooth things out during the momentum
-    // ("coast") phase after the finger lifts, when scroll events get sparse.
-    function onTouchStart() {
-      setTransition("none");
-    }
-    function onTouchEnd() {
-      setTransition("transform 140ms ease-out, filter 140ms ease-out, opacity 140ms ease-out");
+    for (const card of cardRefs.current) {
+      if (card) card.style.transition = "transform 60ms linear, filter 60ms linear, opacity 60ms linear";
     }
 
     update();
-    setTransition("none");
     const settleTimer = window.setTimeout(update, 300);
     scroller.addEventListener("scroll", onScroll, { passive: true });
-    scroller.addEventListener("touchstart", onTouchStart, { passive: true });
-    scroller.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
       scroller.removeEventListener("scroll", onScroll);
-      scroller.removeEventListener("touchstart", onTouchStart);
-      scroller.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onScroll);
       window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
@@ -100,7 +83,7 @@ export function ServicesMobile() {
     <div className="lg:hidden">
       <div
         ref={scrollerRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-[10%] py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-proximity gap-4 overflow-x-auto px-[10%] py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {services.map((service, index) => {
           const href = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
