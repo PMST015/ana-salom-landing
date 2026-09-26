@@ -83,7 +83,7 @@ export function ServicesMobile() {
     <div className="lg:hidden">
       <div
         ref={scrollerRef}
-        className="flex snap-x snap-proximity gap-4 overflow-x-auto px-[10%] py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex gap-4 overflow-x-auto px-[10%] py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {services.map((service, index) => {
           const href = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
@@ -96,7 +96,7 @@ export function ServicesMobile() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="relative aspect-[4/5] w-[80%] shrink-0 snap-center overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 will-change-[transform,filter]"
+              className="relative aspect-[4/5] w-[80%] shrink-0 overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 will-change-[transform,filter]"
             >
               <img
                 src={`/images/services/${service.slug}-800.webp`}
