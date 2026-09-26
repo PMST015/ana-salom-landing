@@ -62,13 +62,34 @@ export function ServicesMobile() {
       raf = requestAnimationFrame(update);
     }
 
+    function setTransition(value: string) {
+      for (const card of cardRefs.current) {
+        if (card) card.style.transition = value;
+      }
+    }
+
+    // No transition while the finger is actually on the screen — the visual
+    // must track the touch 1:1. Only smooth things out during the momentum
+    // ("coast") phase after the finger lifts, when scroll events get sparse.
+    function onTouchStart() {
+      setTransition("none");
+    }
+    function onTouchEnd() {
+      setTransition("transform 140ms ease-out, filter 140ms ease-out, opacity 140ms ease-out");
+    }
+
     update();
+    setTransition("none");
     const settleTimer = window.setTimeout(update, 300);
     scroller.addEventListener("scroll", onScroll, { passive: true });
+    scroller.addEventListener("touchstart", onTouchStart, { passive: true });
+    scroller.addEventListener("touchend", onTouchEnd, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
       scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener("touchstart", onTouchStart);
+      scroller.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onScroll);
       window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
@@ -92,7 +113,7 @@ export function ServicesMobile() {
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
-              className="relative aspect-[4/5] w-[80%] shrink-0 snap-center overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 transition-[transform,filter,opacity] duration-150 ease-out will-change-[transform,filter]"
+              className="relative aspect-[4/5] w-[80%] shrink-0 snap-center overflow-hidden rounded-3xl bg-secondary shadow-lg shadow-primary/10 will-change-[transform,filter]"
             >
               <img
                 src={`/images/services/${service.slug}-800.webp`}
