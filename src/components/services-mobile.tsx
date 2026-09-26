@@ -20,20 +20,32 @@ export function ServicesMobile() {
 
     let raf = 0;
     function update() {
+      const maxScroll = scroller!.scrollWidth - scroller!.clientWidth;
+      const atStart = scroller!.scrollLeft <= 2;
+      const atEnd = scroller!.scrollLeft >= maxScroll - 2;
+
       const rect = scroller!.getBoundingClientRect();
       const center = rect.left + rect.width / 2;
+      const cards = cardRefs.current;
 
-      for (const card of cardRefs.current) {
-        if (!card) continue;
+      cards.forEach((card, i) => {
+        if (!card) return;
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.left + cardRect.width / 2;
-        const distance = Math.abs(cardCenter - center);
+        let distance = Math.abs(cardCenter - center);
+
+        // Snap the edge cards to fully-focused whenever the scroller rests
+        // at either end, regardless of any sub-pixel/gap rounding.
+        if ((i === 0 && atStart) || (i === cards.length - 1 && atEnd)) {
+          distance = 0;
+        }
+
         const ratio = Math.min(distance / (rect.width / 2), 1);
 
         card.style.filter = `blur(${ratio * 6}px)`;
-        card.style.transform = `scale(${1 - ratio * 0.12})`;
+        card.style.transform = `scale(${1.06 - ratio * 0.22})`;
         card.style.opacity = `${1 - ratio * 0.45}`;
-      }
+      });
       raf = 0;
     }
 
@@ -43,11 +55,13 @@ export function ServicesMobile() {
     }
 
     update();
+    const settleTimer = window.setTimeout(update, 300);
     scroller.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
       scroller.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.clearTimeout(settleTimer);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -80,16 +94,17 @@ export function ServicesMobile() {
                 decoding="async"
                 className="absolute inset-0 size-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-black/25" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/10" />
 
-              <div className="relative flex h-full flex-col justify-end p-5 pr-20">
+              <div className="relative flex h-full flex-col justify-end p-5 pr-16">
                 <span className="font-heading text-sm text-primary">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-1 font-heading text-xl font-medium tracking-tight text-white">
+                <h3 className="mt-1 font-heading text-lg font-medium leading-tight tracking-tight text-white">
                   {service.title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-snug text-white/85">{service.blurb}</p>
+                <p className="mt-1.5 text-sm leading-snug text-white/90">{service.summary}</p>
               </div>
 
               <a

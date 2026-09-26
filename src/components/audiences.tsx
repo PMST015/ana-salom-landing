@@ -43,22 +43,18 @@ function AudienceCard({
   return (
     <motion.div
       initial={
-        reduceMotion
-          ? { opacity: 0 }
-          : {
-              opacity: 0.3,
-              filter: "blur(12px)",
-              transform: `translateX(${isDesktop ? offset : 0}px)`,
-            }
+        reduceMotion || !isDesktop
+          ? { opacity: 1 }
+          : { opacity: 0.3, filter: "blur(12px)", transform: `translateX(${offset}px)` }
       }
       whileInView={
-        reduceMotion
+        reduceMotion || !isDesktop
           ? { opacity: 1 }
           : { opacity: 1, filter: "blur(0px)", transform: "translateX(0px)" }
       }
       viewport={{ once: false, amount: 0.4 }}
       transition={{ duration: 0.65, ease: [0.23, 1, 0.32, 1] }}
-      className="group relative min-h-[420px] overflow-hidden rounded-3xl shadow-lg shadow-primary/10"
+      className="group relative min-h-[520px] overflow-hidden rounded-3xl shadow-lg shadow-primary/10 lg:min-h-[420px]"
     >
       <img
         src={`/images/audiences/${slug}-800.webp`}
