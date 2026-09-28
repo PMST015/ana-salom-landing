@@ -144,7 +144,7 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
 
       <div
         ref={scrollerRef}
-        className="flex cursor-grab gap-6 overflow-x-auto [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+        className="flex cursor-grab gap-4 overflow-x-auto [scrollbar-width:none] active:cursor-grabbing sm:gap-6 [&::-webkit-scrollbar]:hidden"
         style={{ touchAction: "none" }}
       >
         {track.map((item, index) => {
@@ -154,7 +154,7 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
               alt={item.name}
               draggable={false}
               loading="lazy"
-              className="max-h-16 max-w-[75%] select-none object-contain sm:max-h-20"
+              className="h-full w-full select-none object-contain p-5 sm:p-6"
             />
           );
 
@@ -166,14 +166,14 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
               rel="noopener noreferrer"
               aria-label={item.name}
               draggable={false}
-              className="flex h-28 w-64 shrink-0 items-center justify-center rounded-xl border border-border bg-background px-6 transition-colors hover:border-primary"
+              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl border border-border bg-background transition-colors hover:border-primary sm:h-28 sm:w-64"
             >
               {content}
             </a>
           ) : (
             <div
               key={`${item.slug}-${index}`}
-              className="flex h-28 w-64 shrink-0 items-center justify-center rounded-xl border border-border bg-background px-6"
+              className="flex h-24 w-24 shrink-0 items-center justify-center rounded-xl border border-border bg-background sm:h-28 sm:w-64"
             >
               {content}
             </div>

@@ -18,7 +18,7 @@ const manrope = Manrope({
 const title =
   "Ana María Salom Reyes — Psicoterapia Integral y Acompañamiento a Empresas Familiares en Bogotá";
 const description =
-  "Psicóloga, psicoterapeuta integral y coach de propósito con +30 años de experiencia. Acompañamiento terapéutico individual y consultoría para empresas familiares: sanación, cuidado de cuidadores, terapia familiar y propósito de vida, en Bogotá y online.";
+  "Psicóloga, psicoterapeuta integral y coach de propósito con +35 años de experiencia. Acompañamiento terapéutico individual y consultoría para empresas familiares: sanación, cuidado de cuidadores, terapia familiar y propósito de vida, en Bogotá y online.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -26,7 +26,7 @@ export const brand = {
     "Sanar lo vivido. Cuidarnos para cuidar. Recordar nuestro propósito. Poner nuestros dones al servicio de la vida.",
   heroLead:
     "Acompaño a personas, familias y empresas familiares en procesos de transformación profunda — psicología, cuerpo, biografía y propósito, al servicio de una nueva manera de vivir y relacionarnos.",
-  trustStat: "+30 años · +20.000 horas de acompañamiento",
+  trustStat: "+35 años · +25.000 horas de acompañamiento",
   pillars: ["Sanación", "Cuidado", "Propósito", "Regeneración"],
   signature:
     "Acompaño a transformar la historia vivida en consciencia, propósito y posibilidad regenerativa.",
@@ -34,7 +34,7 @@ export const brand = {
 
 export const bio = {
   paragraphs: [
-    "Más de 30 años acompañando procesos de desarrollo humano, transformación y liderazgo en personas, familias, empresas y comunidades — en momentos de transición, crisis, conflicto o búsqueda de sentido. Mi trabajo integra lo psicológico, lo biográfico, lo corporal y lo contemplativo: no solo lo que necesita sanar, sino también lo que está llamado a desplegarse.",
+    "Más de 35 años acompañando procesos de desarrollo humano, transformación y liderazgo en personas, familias, empresas y comunidades — en momentos de transición, crisis, conflicto o búsqueda de sentido. Mi trabajo integra lo psicológico, lo biográfico, lo corporal y lo contemplativo: no solo lo que necesita sanar, sino también lo que está llamado a desplegarse.",
     "Soy colombo-libanesa, psicóloga y humanista. Mi propia historia me enseñó el valor de las raíces, la familia y el encuentro entre culturas — y me llevó a una convicción: la transformación ocurre cuando lo que comprendemos se encarna en la forma en que vivimos, cuidamos y nos relacionamos.",
   ],
   credentials: [
@@ -219,8 +219,8 @@ export const companies: LogoItem[] = [
 
 export const allies: LogoItem[] = [
   { name: "Satori — Despertar para Prosperar", slug: "satori", href: "https://satoridespertar.com/" },
-  { name: "IDG Hub Colombia", slug: "idg-hub-colombia", href: "https://idgcolombiacentre.com/" },
-  { name: "País de Raíz", slug: "pais-de-raiz", href: "https://www.paisderaiz.com/" },
+  { name: "IDG Hub Colombia", slug: "idg-hub-colombia", href: "https://www.quantichumanism.org/idg-colombia/" },
+  { name: "País de Raíz", slug: "pais-de-raiz", href: "https://www.paisderaiz.com/nosotros" },
   {
     name: "Humanistic Management Network",
     slug: "humanistic-management-network",

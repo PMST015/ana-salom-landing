@@ -9,7 +9,7 @@ export function Allies() {
         <Reveal>
           <div className="max-w-2xl">
             <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary">
-              Aliados
+              Aliados y Proyectos
             </p>
             <h2 className="mt-3 font-heading text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
               Redes aliadas y proyectos sociales
