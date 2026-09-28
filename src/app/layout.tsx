@@ -16,10 +16,9 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const title =
-  "Ana María Salom Reyes — Psicoterapia Integral y Acompañamiento a Empresas Familiares en Bogotá";
+const title = "Ana María Salom Reyes — Psicoterapeuta y Coach en Bogotá";
 const description =
-  "Psicóloga, psicoterapeuta integral y coach de propósito con +35 años de experiencia. Acompañamiento terapéutico individual y consultoría para empresas familiares: sanación, cuidado de cuidadores, terapia familiar y propósito de vida, en Bogotá y online.";
+  "Psicóloga y coach de propósito con +35 años de experiencia. Psicoterapia y consultoría para personas y empresas familiares, en Bogotá y online.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -48,11 +47,20 @@ export const metadata: Metadata = {
     siteName: brand.name,
     title,
     description,
+    images: [
+      {
+        url: "/images/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: brand.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
+    images: ["/images/og-image.webp"],
   },
   robots: {
     index: true,

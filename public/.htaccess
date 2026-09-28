@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force www (matches the canonical URL used in metadata/sitemap)
+RewriteCond %{HTTP_HOST} ^anamariasalomreyes\.com [NC]
+RewriteRule ^(.*)$ https://www.anamariasalomreyes.com/$1 [L,R=301]
