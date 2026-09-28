@@ -6,8 +6,19 @@ import type { LogoItem } from "@/lib/site-content";
 
 const SPEED_PX_PER_SEC = 34;
 const DRAG_THRESHOLD = 4;
+// Bump this when regenerating logo images so browsers/CDNs that cached the
+// old bytes at the same filename fetch the new ones instead of stale ones.
+const ASSET_VERSION = "3";
 
-export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: string }) {
+export function LogoMarquee({
+  items,
+  imageDir,
+  imageScale = 1,
+}: {
+  items: LogoItem[];
+  imageDir: string;
+  imageScale?: number;
+}) {
   const reduceMotion = useReducedMotion();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
@@ -148,13 +159,15 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
         style={{ touchAction: "none" }}
       >
         {track.map((item, index) => {
+          const scale = (item.scale ?? 1) * imageScale;
           const content = (
             <img
-              src={`${imageDir}/${item.slug}.webp`}
+              src={`${imageDir}/${item.slug}.webp?v=${ASSET_VERSION}`}
               alt={item.name}
               draggable={false}
               loading="lazy"
               className="h-full w-full select-none object-contain p-5 sm:p-6"
+              style={scale !== 1 ? { transform: `scale(${scale})` } : undefined}
             />
           );
 

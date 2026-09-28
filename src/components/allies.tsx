@@ -24,7 +24,7 @@ export function Allies() {
 
       <Reveal delay={0.08}>
         <div className="mt-10">
-          <LogoMarquee items={allies} imageDir="/images/allies" />
+          <LogoMarquee items={allies} imageDir="/images/allies" imageScale={1.15} />
         </div>
       </Reveal>
     </section>

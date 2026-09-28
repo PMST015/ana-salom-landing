@@ -198,13 +198,13 @@ export const faqs: FAQItem[] = [
   },
 ];
 
-export type LogoItem = { name: string; slug: string; href?: string };
+export type LogoItem = { name: string; slug: string; href?: string; scale?: number };
 
 export const companies: LogoItem[] = [
-  { name: "Alpina", slug: "alpina" },
-  { name: "Bavaria", slug: "bavaria" },
-  { name: "Suramericana", slug: "suramericana" },
-  { name: "Contact Center Americas", slug: "contact-center-americas" },
+  { name: "Alpina", slug: "alpina", scale: 1.1 },
+  { name: "Bavaria", slug: "bavaria", scale: 1.1 },
+  { name: "Suramericana", slug: "suramericana", scale: 1.1 },
+  { name: "Contact Center Americas", slug: "contact-center-americas", scale: 1.1 },
   { name: "G4S", slug: "g4s" },
   { name: "Asopagos S.A.", slug: "asopagos" },
   { name: "Redeban Multicolor", slug: "redeban-multicolor" },
@@ -214,7 +214,7 @@ export const companies: LogoItem[] = [
   { name: "corona", slug: "corona" },
   { name: "Carvajal", slug: "carvajal" },
   { name: "UNICEF Perú", slug: "unicef-peru" },
-  { name: "LATAM Airlines", slug: "latam-airlines" },
+  { name: "LATAM Airlines", slug: "latam-airlines", scale: 1.1 },
 ];
 
 export const allies: LogoItem[] = [
