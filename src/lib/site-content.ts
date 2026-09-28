@@ -198,21 +198,35 @@ export const faqs: FAQItem[] = [
   },
 ];
 
-// Placeholders — reemplazar con logos y datos reales que Ana entregue.
-export type LogoPlaceholder = { name: string; href?: string };
+export type LogoItem = { name: string; slug: string; href?: string };
 
-export const companies: LogoPlaceholder[] = [
-  { name: "Empresa familiar 1" },
-  { name: "Empresa familiar 2" },
-  { name: "Empresa familiar 3" },
-  { name: "Empresa familiar 4" },
+export const companies: LogoItem[] = [
+  { name: "Alpina", slug: "alpina" },
+  { name: "Bavaria", slug: "bavaria" },
+  { name: "Suramericana", slug: "suramericana" },
+  { name: "Contact Center Americas", slug: "contact-center-americas" },
+  { name: "G4S", slug: "g4s" },
+  { name: "Asopagos S.A.", slug: "asopagos" },
+  { name: "Redeban Multicolor", slug: "redeban-multicolor" },
+  { name: "ParqueArauco", slug: "parquearauco" },
+  { name: "Seguros Falabella", slug: "seguros-falabella" },
+  { name: "Colpatria", slug: "colpatria" },
+  { name: "corona", slug: "corona" },
+  { name: "Carvajal", slug: "carvajal" },
+  { name: "UNICEF Perú", slug: "unicef-peru" },
+  { name: "LATAM Airlines", slug: "latam-airlines" },
 ];
 
-export const allies: LogoPlaceholder[] = [
-  { name: "Proyecto aliado 1", href: "#" },
-  { name: "Proyecto aliado 2", href: "#" },
-  { name: "Proyecto aliado 3", href: "#" },
-  { name: "Proyecto aliado 4", href: "#" },
+export const allies: LogoItem[] = [
+  { name: "Satori — Despertar para Prosperar", slug: "satori", href: "https://satoridespertar.com/" },
+  { name: "IDG Hub Colombia", slug: "idg-hub-colombia", href: "https://idgcolombiacentre.com/" },
+  { name: "País de Raíz", slug: "pais-de-raiz", href: "https://www.paisderaiz.com/" },
+  {
+    name: "Humanistic Management Network",
+    slug: "humanistic-management-network",
+    href: "https://humanisticmanagement.network/",
+  },
+  { name: "Alianza Pachamama", slug: "alianza-pachamama", href: "https://pachamama.org/" },
 ];
 
 export const nav = [
