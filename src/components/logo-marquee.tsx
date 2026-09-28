@@ -8,7 +8,7 @@ const SPEED_PX_PER_SEC = 34;
 const DRAG_THRESHOLD = 4;
 // Bump this when regenerating logo images so browsers/CDNs that cached the
 // old bytes at the same filename fetch the new ones instead of stale ones.
-const ASSET_VERSION = "3";
+const ASSET_VERSION = "4";
 
 export function LogoMarquee({
   items,

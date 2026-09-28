@@ -87,13 +87,17 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Desktop: full-bleed photo, text overlaid on top */}
+      {/* Desktop: full-bleed photo, text overlaid on top. No `priority` here —
+          both this and the mobile image render in the DOM regardless of
+          viewport, and `priority` forces an eager fetch ignoring the
+          `hidden`/lg:block CSS, so marking both eager double-downloads the
+          hero photo on mobile. Lighthouse's mobile LCP is the mobile image,
+          so only that one needs to stay eager. */}
       <div className="relative hidden min-h-[85vh] w-full lg:block">
         <Image
           src="/images/ana-banner-fullbleed.webp"
           alt={`${brand.name}, ${brand.descriptor}`}
           fill
-          priority
           sizes="100vw"
           className="object-cover object-top"
         />
