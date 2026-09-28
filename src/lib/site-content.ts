@@ -3,6 +3,8 @@
 
 export const SITE_URL = "https://www.anamariasalomreyes.com"; // TODO: reemplazar por el dominio real antes de publicar
 
+export const GA_MEASUREMENT_ID = "G-MS5FVFH0TY";
+
 export const contact = {
   whatsappNumber: "573157839103",
   whatsappDisplay: "+57 315 7839103",
