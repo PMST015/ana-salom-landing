@@ -14,8 +14,14 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
   const draggingRef = useRef(false);
   const dragMovedRef = useRef(false);
   const pointerStartX = useRef(0);
-  const startScrollLeft = useRef(0);
+  const startPos = useRef(0);
   const setWidthRef = useRef(0);
+  // Our own floating-point scroll position. `Element.scrollLeft` rounds to
+  // an integer pixel on read, so accumulating a sub-1px-per-frame speed by
+  // reading it back each tick would round the fractional part away every
+  // time and the track would never actually move — this ref is the source
+  // of truth instead, and scrollLeft is only ever written from it.
+  const posRef = useRef(0);
 
   const track = [...items, ...items, ...items];
 
@@ -23,30 +29,38 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
+    function wrap(pos: number) {
+      const w = setWidthRef.current;
+      if (w <= 0) return pos;
+      if (pos > w * 1.5) return pos - w;
+      if (pos < w * 0.5) return pos + w;
+      return pos;
+    }
+
+    function setPos(pos: number) {
+      posRef.current = wrap(pos);
+      scroller!.scrollLeft = posRef.current;
+    }
+
     function measure() {
-      const w = scroller!.scrollWidth / 3;
-      setWidthRef.current = w;
-      scroller!.scrollLeft = w;
+      setWidthRef.current = scroller!.scrollWidth / 3;
+      setPos(setWidthRef.current);
     }
     measure();
     window.addEventListener("resize", measure);
 
-    function wrap() {
-      const w = setWidthRef.current;
-      if (w <= 0) return;
-      if (scroller!.scrollLeft > w * 1.5) scroller!.scrollLeft -= w;
-      else if (scroller!.scrollLeft < w * 0.5) scroller!.scrollLeft += w;
-    }
-
     let raf = 0;
     let last = performance.now();
+    // Reduced-motion users still get the marquee (it's already user-pausable
+    // via hover/touch, satisfying WCAG 2.2.2 Pause/Stop/Hide) but slower —
+    // "gentler, not zero".
+    const speed = reduceMotion ? SPEED_PX_PER_SEC * 0.4 : SPEED_PX_PER_SEC;
 
     function tick(now: number) {
       const dt = now - last;
       last = now;
-      if (!pausedRef.current && !draggingRef.current && !reduceMotion) {
-        scroller!.scrollLeft += (SPEED_PX_PER_SEC * dt) / 1000;
-        wrap();
+      if (!pausedRef.current && !draggingRef.current) {
+        setPos(posRef.current + (speed * dt) / 1000);
       }
       raf = requestAnimationFrame(tick);
     }
@@ -60,7 +74,7 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
       draggingRef.current = true;
       dragMovedRef.current = false;
       pointerStartX.current = e.clientX;
-      startScrollLeft.current = scroller!.scrollLeft;
+      startPos.current = posRef.current;
       scroller!.setPointerCapture(e.pointerId);
       setPaused(true);
     }
@@ -68,8 +82,7 @@ export function LogoMarquee({ items, imageDir }: { items: LogoItem[]; imageDir: 
       if (!draggingRef.current) return;
       const dx = e.clientX - pointerStartX.current;
       if (Math.abs(dx) > DRAG_THRESHOLD) dragMovedRef.current = true;
-      scroller!.scrollLeft = startScrollLeft.current - dx;
-      wrap();
+      setPos(startPos.current - dx);
     }
     function endDrag(e: PointerEvent) {
       draggingRef.current = false;
