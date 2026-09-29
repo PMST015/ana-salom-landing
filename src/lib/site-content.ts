@@ -203,20 +203,34 @@ export const faqs: FAQItem[] = [
 export type LogoItem = { name: string; slug: string; href?: string; scale?: number };
 
 export const companies: LogoItem[] = [
-  { name: "Alpina", slug: "alpina", scale: 1.1 },
-  { name: "Bavaria", slug: "bavaria", scale: 1.1 },
-  { name: "Suramericana", slug: "suramericana", scale: 1.1 },
-  { name: "Contact Center Americas", slug: "contact-center-americas", scale: 1.1 },
-  { name: "G4S", slug: "g4s" },
-  { name: "Asopagos S.A.", slug: "asopagos" },
-  { name: "Redeban Multicolor", slug: "redeban-multicolor" },
-  { name: "ParqueArauco", slug: "parquearauco" },
-  { name: "Seguros Falabella", slug: "seguros-falabella" },
-  { name: "Colpatria", slug: "colpatria" },
-  { name: "corona", slug: "corona" },
-  { name: "Carvajal", slug: "carvajal" },
-  { name: "UNICEF Perú", slug: "unicef-peru" },
-  { name: "LATAM Airlines", slug: "latam-airlines", scale: 1.1 },
+  { name: "Alpina", slug: "alpina", scale: 1.1, href: "https://alpina.com/" },
+  { name: "Bavaria", slug: "bavaria", scale: 1.1, href: "https://www.bavaria.co/" },
+  { name: "Suramericana", slug: "suramericana", scale: 1.1, href: "https://www.sura.co/" },
+  {
+    name: "Contact Center Americas",
+    slug: "contact-center-americas",
+    scale: 1.1,
+    href: "https://www.contactcenteramericas.com/",
+  },
+  { name: "G4S", slug: "g4s", href: "https://www.g4s.com/es-co" },
+  { name: "Asopagos S.A.", slug: "asopagos", href: "https://www.asopagos.com/" },
+  { name: "Redeban Multicolor", slug: "redeban-multicolor", href: "https://www.redeban.com/" },
+  { name: "ParqueArauco", slug: "parquearauco", href: "https://www.parauco.com/" },
+  {
+    name: "Seguros Falabella",
+    slug: "seguros-falabella",
+    href: "https://www.bancofalabella.com.co/seguros-falabella",
+  },
+  { name: "Colpatria", slug: "colpatria", href: "https://www.davibank.com/" },
+  { name: "corona", slug: "corona", href: "https://www.corona.co/" },
+  { name: "Carvajal", slug: "carvajal", href: "https://www.carvajal.com/" },
+  { name: "UNICEF Perú", slug: "unicef-peru", href: "https://www.unicef.org/peru/" },
+  {
+    name: "LATAM Airlines",
+    slug: "latam-airlines",
+    scale: 1.1,
+    href: "https://www.latamairlines.com/",
+  },
 ];
 
 export const allies: LogoItem[] = [
