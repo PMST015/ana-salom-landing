@@ -86,13 +86,22 @@ export function LogoMarquee({
       dragMovedRef.current = false;
       pointerStartX.current = e.clientX;
       startPos.current = posRef.current;
-      scroller!.setPointerCapture(e.pointerId);
       setPaused(true);
+      // Deliberately NOT calling setPointerCapture here. Capturing on every
+      // pointerdown -- even a plain click with zero movement -- makes the
+      // browser target the resulting "click" event at the capturing element
+      // (this scroller) instead of whatever was actually under the pointer,
+      // so a click on a logo's <a> never reaches the anchor and never
+      // navigates. Capture is acquired lazily below, only once real drag
+      // movement is confirmed.
     }
     function onPointerMove(e: PointerEvent) {
       if (!draggingRef.current) return;
       const dx = e.clientX - pointerStartX.current;
-      if (Math.abs(dx) > DRAG_THRESHOLD) dragMovedRef.current = true;
+      if (Math.abs(dx) > DRAG_THRESHOLD && !dragMovedRef.current) {
+        dragMovedRef.current = true;
+        scroller!.setPointerCapture(e.pointerId);
+      }
       setPos(startPos.current - dx);
     }
     function endDrag(e: PointerEvent) {
