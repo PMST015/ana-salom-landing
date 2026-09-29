@@ -115,13 +115,13 @@ export function Audiences() {
             slug="personas"
             data={audiences.b2c}
             fromSide="left"
-            ctaMessage="Hola Ana, me gustaría agendar una primera conversación contigo."
+            ctaMessage="Hola, vi la página web y quiero información sobre: acompañamiento para personas."
           />
           <AudienceCard
             slug="empresas"
             data={audiences.b2b}
             fromSide="right"
-            ctaMessage="Hola Ana, represento a una empresa familiar y me gustaría conversar sobre acompañamiento."
+            ctaMessage="Hola, vi la página web y quiero información sobre: acompañamiento para empresas familiares."
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ export const GA_MEASUREMENT_ID = "G-MS5FVFH0TY";
 export const contact = {
   whatsappNumber: "573157839103",
   whatsappDisplay: "+57 315 7839103",
-  whatsappMessage: "Hola Ana, me gustaría agendar una primera conversación contigo.",
+  whatsappMessage: "Hola, vi la página web y quiero información sobre: acompañamiento terapéutico.",
   instagramHandle: "anasalomreyes",
   instagramUrl: "https://www.instagram.com/anasalomreyes",
   linkedinUrl: "https://www.linkedin.com/in/ana-mar%C3%ADa-salom-reyes/",

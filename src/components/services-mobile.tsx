@@ -127,7 +127,7 @@ export function ServicesMobile() {
       >
         {services.map((service, index) => {
           const href = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(
-            `Hola Ana, me gustaría saber más sobre ${service.title}.`
+            `Hola, vi la página web y quiero información sobre: ${service.title}.`
           )}`;
 
           return (

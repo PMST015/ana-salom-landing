@@ -2,7 +2,10 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { WhatsAppIcon } from "@/components/icons";
-import { whatsappHref } from "@/lib/site-content";
+import { contact } from "@/lib/site-content";
+
+const floatMessage = "Hola, vi la página web y quiero más información sobre tu acompañamiento";
+const floatHref = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(floatMessage)}`;
 
 export function WhatsAppFloatButton() {
   const reduceMotion = useReducedMotion();
@@ -18,7 +21,7 @@ export function WhatsAppFloatButton() {
         />
       )}
       <motion.a
-        href={whatsappHref}
+        href={floatHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp"
